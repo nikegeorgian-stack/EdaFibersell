@@ -4,62 +4,102 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Fibercell Technology - Food Order System</title>
+  <title>Fibercell Technology</title>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --blue: #1a3f8f; --blue-mid: #2a5298; --blue-light: #e8eeff;
-      --purple: #5b21b6; --purple-light: #ede9fe;
-      --green: #059669; --green-light: #d1fae5;
-      --red: #dc2626; --red-light: #fee2e2;
-      --gray-100: #f3f4f6; --gray-200: #e5e7eb;
-      --gray-400: #9ca3af; --gray-600: #4b5563; --gray-800: #1f2937;
-      --white: #ffffff; --shadow: 0 4px 24px rgba(26,63,143,0.13);
-      --radius: 14px; --radius-sm: 8px;
-      --topbar-h: 60px;
+      --brand: #FF5500;
+      --brand-dark: #E04D00;
+      --brand-light: #FFF4ED;
+      --brand-soft: #FFE8DB;
+      --black: #0A0A0A;
+      --green: #16A34A; --green-light: #DCFCE7;
+      --red: #DC2626; --red-light: #FEE2E2;
+      --gray-50: #FAFAFA;
+      --gray-100: #F5F5F5; --gray-200: #E5E5E5;
+      --gray-400: #A3A3A3; --gray-600: #525252; --gray-700: #404040; --gray-800: #171717;
+      --white: #FFFFFF;
+      --shadow: 0 4px 24px rgba(255, 85, 0, 0.07);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.06);
+      --radius: 16px; --radius-sm: 10px;
+      --topbar-h: 52px;
+      --modebar-h: 48px;
+      --header-h: calc(var(--topbar-h) + var(--modebar-h));
     }
     html, body { height: 100%; font-family: 'Manrope', sans-serif; -webkit-text-size-adjust: 100%; }
-    body { background: linear-gradient(135deg, #0f1f5c 0%, #1a3f8f 45%, #4c1d95 100%); min-height: 100vh; color: var(--gray-800); }
+    body { background: var(--gray-50); min-height: 100vh; color: var(--gray-800); }
 
-    /* ── TOPBAR ── */
-    .topbar {
+    /* ── HEADER ── */
+    .app-header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--white);
+      box-shadow: 0 1px 0 var(--gray-200), 0 4px 20px rgba(0,0,0,0.04);
+    }
+    .topbar {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 16px; height: var(--topbar-h);
-      background: rgba(15,31,92,0.95); backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      gap: 8px;
+      padding: 0 14px; height: var(--topbar-h);
+      border-bottom: 3px solid var(--brand);
+      gap: 10px;
     }
-    .lang-switch { display: flex; gap: 5px; flex-shrink: 0; }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      min-width: 0; flex: 1; text-decoration: none;
+    }
+    .logo-mark { width: 34px; height: auto; flex-shrink: 0; }
+    .logo-wordmark { height: 20px; width: auto; max-width: min(150px, 42vw); object-fit: contain; object-position: left; }
+    .lang-switch { display: flex; gap: 4px; flex-shrink: 0; }
     .lang-btn {
-      padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;
-      border: 1.5px solid rgba(255,255,255,0.3); background: transparent;
-      color: rgba(255,255,255,0.7); cursor: pointer; transition: all .2s; font-family: inherit;
-      white-space: nowrap;
+      padding: 7px 11px; border-radius: var(--radius-sm); font-size: 11px; font-weight: 700;
+      border: 2px solid var(--gray-200); background: var(--white);
+      color: var(--gray-600); cursor: pointer; transition: all .18s; font-family: inherit;
+      min-height: 36px;
     }
-    .lang-btn.active { background: white; color: var(--blue); border-color: white; }
-    .lang-btn:hover:not(.active) { background: rgba(255,255,255,0.15); color: white; }
+    .lang-btn.active { background: var(--brand); color: white; border-color: var(--brand); }
+    .lang-btn:hover:not(.active) { border-color: var(--brand); color: var(--brand); }
 
-    .mode-btns { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; flex-shrink: 1; }
-    .mode-btns::-webkit-scrollbar { display: none; }
+    .mode-bar { padding: 7px 12px 8px; background: var(--gray-50); }
+    .mode-btns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: 100%; }
     .mode-btn {
-      padding: 7px 13px; border-radius: 20px; font-size: 12px; font-weight: 700;
-      border: 1.5px solid rgba(255,255,255,0.3); background: transparent;
-      color: rgba(255,255,255,0.7); cursor: pointer; transition: all .2s; font-family: inherit;
-      white-space: nowrap; flex-shrink: 0;
+      padding: 9px 6px; border-radius: var(--radius-sm); font-size: 11px; font-weight: 700;
+      border: 2px solid var(--gray-200); background: var(--white);
+      color: var(--gray-600); cursor: pointer; transition: all .18s; font-family: inherit;
+      text-align: center; min-height: 40px; line-height: 1.2;
     }
-    .mode-btn.active { background: white; color: var(--blue); border-color: white; }
-    .mode-btn:hover:not(.active) { background: rgba(255,255,255,0.12); color: white; }
+    .mode-btn.active { background: var(--brand); color: white; border-color: var(--brand); box-shadow: 0 2px 8px rgba(255,85,0,0.25); }
+    .mode-btn:hover:not(.active) { border-color: var(--brand-soft); background: var(--brand-light); color: var(--brand-dark); }
 
     /* ── MAIN ── */
-    .main { padding: calc(var(--topbar-h) + 16px) 12px 40px; min-height: 100vh; }
+    .main { padding: calc(var(--header-h) + 16px) 12px 48px; min-height: 100vh; max-width: 1140px; margin: 0 auto; }
 
     /* ── CARD ── */
-    .card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px 20px; max-width: 680px; margin: 0 auto; }
+    .card {
+      background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-lg);
+      padding: 0; max-width: 680px; margin: 0 auto; overflow: hidden;
+      border: 1px solid var(--gray-200);
+    }
     .card-wide { max-width: 1100px; }
-    .card-title { font-size: clamp(20px, 5vw, 26px); font-weight: 800; color: var(--gray-800); margin-bottom: 4px; }
-    .card-subtitle { font-size: 14px; font-weight: 600; color: var(--blue-mid); margin-bottom: 22px; }
+    .card-header {
+      display: flex; align-items: center; gap: 14px;
+      padding: 20px 20px 16px;
+      background: linear-gradient(135deg, var(--brand-light) 0%, var(--white) 100%);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .card-header .logo-mark { width: 44px; }
+    .card-header .logo-wordmark { height: 24px; max-width: 180px; }
+    .card-header-body { min-width: 0; flex: 1; }
+    .card-header--split { flex-wrap: wrap; align-items: flex-start; }
+    .card-header--split .section-header-btns { display: flex; gap: 8px; flex-wrap: wrap; width: 100%; margin-top: 4px; }
+    @media (min-width: 601px) {
+      .card-header--split { flex-wrap: nowrap; align-items: center; }
+      .card-header--split .section-header-btns { width: auto; margin-top: 0; margin-left: auto; flex-shrink: 0; }
+    }
+    .card-title { font-size: clamp(17px, 4.5vw, 22px); font-weight: 800; color: var(--gray-800); margin-top: 8px; line-height: 1.25; }
+    .card-body { padding: 20px; }
+    .section-header-brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .section-header-brand .logo-mark { width: 40px; }
+    .section-header-brand .logo-wordmark { height: 22px; max-width: 160px; }
+    .section-header-brand .card-title { margin-top: 6px; margin-bottom: 0; }
 
     /* ── FORM FIELDS ── */
     .field-label { font-size: 12px; font-weight: 700; color: var(--gray-600); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .04em; display: block; }
@@ -70,18 +110,18 @@
       -webkit-appearance: none; appearance: none;
     }
     select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234b5563' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
-    select:focus, input:focus { border-color: var(--blue-mid); background: white; }
+    select:focus, input:focus { border-color: var(--brand); background: white; box-shadow: 0 0 0 3px rgba(255,85,0,0.12); }
 
     /* ── CALENDAR ── */
     .cal-header { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
     .cal-title { font-size: clamp(15px, 4vw, 18px); font-weight: 700; color: var(--gray-800); flex: 1; text-align: center; }
     .cal-nav {
       padding: 8px 14px; border-radius: var(--radius-sm); font-size: 18px; font-weight: 700;
-      border: 2px solid var(--gray-200); background: white; color: var(--blue-mid);
+      border: 2px solid var(--gray-200); background: white; color: var(--brand-dark);
       cursor: pointer; transition: all .2s; font-family: inherit; min-width: 44px; min-height: 44px;
       display: flex; align-items: center; justify-content: center;
     }
-    .cal-nav:hover { background: var(--blue-light); border-color: var(--blue-mid); }
+    .cal-nav:hover { background: var(--brand-light); border-color: var(--brand); color: var(--brand); }
     .weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-bottom: 3px; }
     .weekday { text-align: center; font-size: 11px; font-weight: 700; color: var(--gray-400); padding: 4px 0; }
     .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 18px; }
@@ -92,10 +132,10 @@
       transition: all .18s; font-weight: 700; font-size: clamp(12px, 3vw, 15px); color: var(--gray-800);
       min-height: 36px;
     }
-    .day-cell:hover { border-color: var(--purple); background: var(--purple-light); transform: scale(1.06); }
+    .day-cell:hover { border-color: var(--brand); background: var(--brand-light); transform: scale(1.04); }
     .day-cell:active { transform: scale(0.96); }
     .day-cell.has-order { background: var(--green); border-color: #047857; color: white; }
-    .day-cell.today { border-color: var(--blue-mid); box-shadow: 0 0 0 3px rgba(42,82,152,0.18); }
+    .day-cell.today { border-color: var(--brand); box-shadow: 0 0 0 3px rgba(255,85,0,0.18); }
     .day-cell.past { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
     .day-cell.empty { border: none; background: transparent; cursor: default; pointer-events: none; }
     .order-badge { font-size: 9px; font-weight: 800; margin-top: 1px; background: rgba(0,0,0,0.15); padding: 1px 4px; border-radius: 4px; line-height: 1.2; }
@@ -106,12 +146,13 @@
     .history-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
     .history-stat { background: white; border: 1px solid var(--gray-200); border-radius: 8px; padding: 8px; text-align: center; }
     .history-stat .k { font-size: 10px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 3px; }
-    .history-stat .v { font-size: 18px; font-weight: 800; color: var(--blue-mid); }
+    .history-stat .v { font-size: 18px; font-weight: 800; color: var(--brand); }
     .history-list { margin-top: 10px; max-height: 220px; overflow-y: auto; display: grid; gap: 6px; }
     .history-item { background: white; border: 1px solid var(--gray-200); border-radius: 8px; padding: 8px 10px; display: flex; justify-content: space-between; gap: 8px; align-items: center; }
     .history-item .d { font-size: 12px; color: var(--gray-600); font-weight: 700; }
     .history-item .b { display: flex; gap: 6px; align-items: center; font-size: 12px; font-weight: 800; }
     .quick-day-lists { display: grid; gap: 10px; margin-top: 12px; }
+    @media (min-width: 520px) { .quick-day-lists { grid-template-columns: 1fr 1fr; } }
     .quick-day-card { background: white; border: 1px solid var(--gray-200); border-radius: 10px; padding: 10px 12px; }
     .quick-day-card h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--gray-600); margin-bottom: 6px; }
     .quick-day-card p { font-size: 13px; color: var(--gray-800); line-height: 1.5; }
@@ -119,9 +160,48 @@
     .quick-day-item { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 8px; padding: 7px 9px; display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13px; }
     .quick-day-item .idx { color: var(--gray-600); font-weight: 700; }
 
+    .deadline-banner { border-radius: var(--radius-sm); padding: 12px 14px; margin: 12px 0 0; font-size: 13px; line-height: 1.5; }
+    .deadline-banner.open { background: #ecfdf5; border: 2px solid #6ee7b7; color: #047857; }
+    .deadline-banner.open strong { display: block; font-size: 14px; margin-bottom: 3px; }
+    .deadline-banner.closed { background: #fef3c7; border: 2px solid #f59e0b; color: #78350f; }
+    .deadline-banner.closed strong { display: block; font-size: 14px; color: #b45309; margin-bottom: 3px; }
+
+    .quick-order-panel { background: var(--brand-light); border: 2px solid var(--brand-soft); border-radius: var(--radius-sm); padding: 16px; margin-top: 14px; }
+    .quick-order-panel .panel-title { font-size: 14px; font-weight: 800; color: var(--brand-dark); margin-bottom: 4px; }
+    .quick-order-panel .panel-date { font-size: 12px; color: var(--gray-600); margin-bottom: 12px; font-weight: 600; }
+    .quick-order-panel.locked { opacity: 0.65; pointer-events: none; }
+
+    .employee-month-summary { background: white; border: 2px solid var(--gray-200); border-radius: var(--radius-sm); padding: 14px 16px; margin-top: 12px; }
+    .employee-month-summary .ems-head { margin-bottom: 8px; }
+    .employee-month-summary .ems-title { font-size: 13px; font-weight: 800; color: var(--gray-800); }
+    .employee-month-summary .ems-nav { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+    .employee-month-summary .ems-nav-btn {
+      padding: 6px 12px; border-radius: var(--radius-sm); font-size: 16px; font-weight: 700;
+      border: 2px solid var(--gray-200); background: white; color: var(--brand-dark);
+      cursor: pointer; transition: all .2s; font-family: inherit; min-width: 36px; min-height: 36px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .employee-month-summary .ems-nav-btn:hover:not(:disabled) { background: var(--brand-light); border-color: var(--brand); color: var(--brand); }
+    .employee-month-summary .ems-nav-btn:disabled { opacity: 0.35; cursor: default; }
+    .employee-month-summary .ems-month { font-size: 13px; font-weight: 700; color: var(--brand); flex: 1; text-align: center; min-width: 100px; }
+    .employee-month-summary .ems-nav-current {
+      padding: 6px 10px; border-radius: var(--radius-sm); font-size: 11px; font-weight: 700;
+      border: 2px solid var(--brand-soft); background: var(--brand-light); color: var(--brand-dark);
+      cursor: pointer; font-family: inherit; min-height: 36px; white-space: nowrap;
+    }
+    .employee-month-summary .ems-nav-current:hover:not(:disabled) { border-color: var(--brand); color: var(--brand); }
+    .employee-month-summary .ems-nav-current:disabled { opacity: 0.45; cursor: default; }
+    .employee-month-summary .ems-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .employee-month-summary .ems-stat { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 8px; padding: 10px 8px; text-align: center; }
+    .employee-month-summary .ems-stat--deduct { background: var(--brand-light); border-color: var(--brand-soft); }
+    .employee-month-summary .ems-k { font-size: 10px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; line-height: 1.3; }
+    .employee-month-summary .ems-v { font-size: 17px; font-weight: 800; color: var(--gray-800); }
+    .employee-month-summary .ems-stat--deduct .ems-v { color: var(--brand); }
+    .employee-month-summary .ems-note { margin-top: 10px; font-size: 11px; color: var(--gray-500); line-height: 1.45; }
+
     /* ── TABLE ── */
     .report-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 500px; }
-    .report-table thead { background: linear-gradient(90deg, var(--blue) 0%, var(--purple) 100%); }
+    .report-table thead { background: var(--brand); }
     .report-table th { padding: 11px 10px; text-align: left; font-weight: 700; font-size: 11px; color: white; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
     .report-table td { padding: 10px; border-bottom: 1px solid var(--gray-200); color: var(--gray-800); }
     .report-table tbody tr:hover { background: var(--gray-100); }
@@ -131,14 +211,14 @@
     /* ── STATS ── */
     .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 18px; }
     .stat-card { border-radius: var(--radius-sm); padding: 14px 16px; border: 1.5px solid; }
-    .stat-card.purple { background: var(--purple-light); border-color: #c4b5fd; }
-    .stat-card.blue { background: var(--blue-light); border-color: #93c5fd; }
+    .stat-card.purple { background: var(--brand-light); border-color: var(--brand-soft); }
+    .stat-card.blue { background: var(--gray-100); border-color: var(--gray-200); }
     .stat-card.green { background: var(--green-light); border-color: #6ee7b7; }
     .stat-card.red { background: var(--red-light); border-color: #fca5a5; }
     .stat-label { font-size: 11px; font-weight: 700; color: var(--gray-600); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
     .stat-value { font-size: clamp(20px, 5vw, 26px); font-weight: 800; }
-    .stat-card.purple .stat-value { color: var(--purple); }
-    .stat-card.blue .stat-value { color: var(--blue-mid); }
+    .stat-card.purple .stat-value { color: var(--brand); }
+    .stat-card.blue .stat-value { color: var(--gray-800); }
     .stat-card.green .stat-value { color: var(--green); }
     .stat-card.red .stat-value { color: var(--red); }
 
@@ -149,8 +229,8 @@
       font-weight: 700; font-family: inherit; cursor: pointer; border: none;
       transition: all .2s; line-height: 1; min-height: 44px; touch-action: manipulation;
     }
-    .btn-primary { background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%); color: white; }
-    .btn-primary:hover { opacity: .88; }
+    .btn-primary { background: var(--brand); color: white; box-shadow: 0 2px 8px rgba(255,85,0,0.25); }
+    .btn-primary:hover { background: var(--brand-dark); }
     .btn-primary:active { transform: scale(0.97); }
     .btn-success { background: var(--green); color: white; }
     .btn-success:hover { background: #047857; }
@@ -158,8 +238,8 @@
     .btn-danger:hover { background: #b91c1c; }
     .btn-ghost { background: var(--gray-200); color: var(--gray-800); }
     .btn-ghost:hover { background: #d1d5db; }
-    .btn-outline { background: white; color: var(--blue-mid); border: 2px solid var(--blue-mid); }
-    .btn-outline:hover { background: var(--blue-light); }
+    .btn-outline { background: white; color: var(--brand); border: 2px solid var(--brand); }
+    .btn-outline:hover { background: var(--brand-light); }
     .btn-amber { background: #d97706; color: white; }
     .btn-amber:hover { background: #b45309; }
     .btn:disabled { opacity: .4; cursor: not-allowed; }
@@ -169,7 +249,7 @@
 
     /* ── FILTERS ── */
     .filters-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
-    .manager-tools { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 12px; margin-bottom: 16px; }
+    .manager-tools { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 16px; }
     .manager-tools-title { font-size: 12px; font-weight: 800; color: var(--gray-600); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 10px; }
     .manager-tools-row { display: grid; grid-template-columns: 1fr; gap: 10px; }
     .quick-filter-menu { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
@@ -194,17 +274,22 @@
     .day-nav { display: flex; align-items: center; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; }
     .day-nav h2 { font-size: clamp(13px, 3vw, 16px); font-weight: 700; color: var(--gray-800); flex: 1 1 100%; text-align: center; order: -1; }
     .day-nav .btn { flex: 1; justify-content: center; }
-    .cook-details-card { background: var(--blue-light); border-radius: var(--radius); padding: 18px; border: 1.5px solid #93c5fd; }
-    .cook-details-card h3 { font-size: 14px; font-weight: 700; color: var(--blue-mid); margin-bottom: 12px; }
-    .cook-detail-item { background: white; border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 6px; border-left: 4px solid var(--purple); font-size: 13px; display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+    .cook-details-card { background: var(--brand-light); border-radius: var(--radius); padding: 18px; border: 1.5px solid var(--brand-soft); }
+    .cook-details-card h3 { font-size: 14px; font-weight: 700; color: var(--brand-dark); margin-bottom: 12px; }
+    .cook-detail-item { background: white; border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 6px; border-left: 4px solid var(--brand); font-size: 13px; display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
     .cook-money-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 14px; }
     .cook-money-card { border-radius: var(--radius-sm); padding: 12px; border: 1.5px solid var(--gray-200); background: var(--gray-100); text-align: center; }
     .cook-money-card .k { font-size: 11px; color: var(--gray-600); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; font-weight: 700; }
-    .cook-money-card .v { font-size: 24px; font-weight: 800; color: var(--blue-mid); }
+    .cook-money-card .v { font-size: 24px; font-weight: 800; color: var(--brand); }
+
+    .employee-section { display: grid; gap: 0; }
+    .field-block { margin-bottom: 4px; }
+    .field-block + .field-block { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gray-200); }
 
     /* ── MODAL ── */
     .modal-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      position: fixed; inset: 0; background: rgba(10,10,10,0.45);
+      backdrop-filter: blur(4px);
       display: flex; align-items: flex-end; justify-content: center; z-index: 1000;
       padding: 0;
     }
@@ -230,8 +315,8 @@
     }
     .qty-btn.minus { background: var(--red-light); color: var(--red); }
     .qty-btn.minus:hover, .qty-btn.minus:active { background: var(--red); color: white; }
-    .qty-btn.plus { background: var(--green-light); color: var(--green); }
-    .qty-btn.plus:hover, .qty-btn.plus:active { background: var(--green); color: white; }
+    .qty-btn.plus { background: var(--brand-light); color: var(--brand); }
+    .qty-btn.plus:hover, .qty-btn.plus:active { background: var(--brand); color: white; }
     .qty-display {
       flex: 1; height: 44px; text-align: center; font-size: 22px; font-weight: 800;
       border: 2px solid var(--gray-200); border-radius: 10px; color: var(--gray-800); font-family: inherit;
@@ -242,8 +327,9 @@
       position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 2000;
       background: var(--gray-800); color: white; padding: 12px 22px;
       border-radius: 30px; font-size: 14px; font-weight: 600;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3); animation: popUp .2s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2); animation: popUp .2s ease;
       white-space: nowrap; max-width: calc(100vw - 32px); text-align: center;
+      border-left: 4px solid var(--brand);
     }
     @keyframes popUp { from { opacity: 0; transform: translateX(-50%) translateY(10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
 
@@ -257,7 +343,7 @@
     .day-total-card .dtc-val { font-size: clamp(22px, 7vw, 30px); font-weight: 800; }
     .meat-color { color: var(--red); }
     .vegan-color { color: var(--green); }
-    .total-color { color: var(--blue-mid); }
+    .total-color { color: var(--brand); }
 
     .section-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
     .section-header-btns { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -287,31 +373,36 @@
 
     /* Tablet (601–900px) */
     @media (min-width: 601px) {
-      :root { --topbar-h: 60px; }
-      .main { padding: calc(var(--topbar-h) + 20px) 20px 40px; }
-      .card { padding: 28px 24px; }
+      .main { padding: calc(var(--header-h) + 24px) 20px 48px; }
+      .card-body { padding: 24px; }
+      .card-header { padding: 24px 24px 18px; }
       .modal { border-radius: var(--radius); align-self: center; max-height: 85vh; }
       .modal-overlay { align-items: center; padding: 20px; }
       .day-nav h2 { order: 0; flex: none; margin-left: auto; }
       .day-nav { flex-wrap: nowrap; }
+      .logo-wordmark { max-width: 180px; height: 24px; }
     }
 
     /* Desktop (901px+) */
     @media (min-width: 901px) {
-      .main { padding: calc(var(--topbar-h) + 28px) 24px 48px; }
-      .card { padding: 36px; }
+      .main { padding: calc(var(--header-h) + 32px) 24px 56px; }
+      .card-body { padding: 28px 32px; }
       .filters-grid { grid-template-columns: repeat(4, 1fr); }
       .manager-tools-row { grid-template-columns: repeat(3, 1fr); }
       .btn-row .btn { flex: 0 0 auto; }
+      .mode-btn { font-size: 12px; padding: 10px 12px; }
     }
 
     /* Small mobile (≤400px) */
     @media (max-width: 400px) {
-      .topbar { padding: 0 10px; gap: 6px; }
-      .lang-btn { padding: 5px 9px; font-size: 11px; }
-      .mode-btn { padding: 6px 9px; font-size: 11px; }
-      .card { padding: 16px 14px; border-radius: 10px; }
-      .card-title { font-size: 18px; }
+      .topbar { padding: 0 10px; }
+      .mode-bar { padding: 6px 8px; }
+      .mode-btn { font-size: 10px; padding: 8px 4px; }
+      .lang-btn { padding: 6px 8px; font-size: 10px; }
+      .card-body { padding: 16px; }
+      .card-header { padding: 16px; gap: 10px; }
+      .card-header .logo-mark { width: 36px; }
+      .card-title { font-size: 16px; }
       .cook-counts { gap: 10px; }
       .day-totals { gap: 6px; }
       .stats-grid { gap: 8px; }
@@ -321,7 +412,7 @@
 
     /* Landscape mobile */
     @media (max-height: 500px) and (orientation: landscape) {
-      :root { --topbar-h: 50px; }
+      :root { --topbar-h: 46px; --modebar-h: 42px; }
       .modal { max-height: 90vh; }
       .cook-counts { grid-template-columns: 1fr 1fr; }
       .cook-card { padding: 14px 12px; }
@@ -331,30 +422,86 @@
 </head>
 <body>
 
-<div class="topbar">
-  <div class="lang-switch">
-    <button class="lang-btn active" data-lang="ru">🇷🇺 РУ</button>
-    <button class="lang-btn" data-lang="ka">🇬🇪 KA</button>
+<header class="app-header">
+  <div class="topbar">
+    <div class="brand">
+      <img src="assets/logo.svg" alt="" class="logo-mark" width="34" height="33">
+      <img src="assets/logo-desc_black.svg" alt="Fibercell Technology" class="logo-wordmark">
+    </div>
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="ru">🇷🇺 РУ</button>
+      <button class="lang-btn" data-lang="ka">🇬🇪 KA</button>
+    </div>
   </div>
-  <div class="mode-btns">
-    <button class="mode-btn active" id="btn-employee"></button>
-    <button class="mode-btn" id="btn-manager"></button>
-    <button class="mode-btn" id="btn-cook"></button>
-  </div>
-</div>
+  <nav class="mode-bar" id="mode-bar-nav" aria-label="">
+    <div class="mode-btns">
+      <button class="mode-btn active" id="btn-employee"></button>
+      <button class="mode-btn" id="btn-manager"></button>
+      <button class="mode-btn" id="btn-cook"></button>
+    </div>
+  </nav>
+</header>
 
 <div class="main">
 
   <!-- EMPLOYEE MODE -->
   <div id="mode-employee">
     <div class="card">
-      <div class="card-title" id="lbl-app-title"></div>
-      <div class="card-subtitle">🏢 Fibercell Technology</div>
-      <div class="mb24">
+      <div class="card-header">
+        <img src="assets/logo.svg" alt="" class="logo-mark" width="44" height="43">
+        <div class="card-header-body">
+          <img src="assets/logo-desc_black.svg" alt="Fibercell Technology" class="logo-wordmark">
+          <h1 class="card-title" id="lbl-app-title"></h1>
+        </div>
+      </div>
+      <div class="card-body">
+      <div class="employee-section mb24">
+        <div class="field-block">
         <label class="field-label" id="lbl-select-name"></label>
         <select id="employee-select">
           <option value="" id="lbl-select-option"></option>
         </select>
+        </div>
+        <div id="deadline-banner" class="deadline-banner hidden"></div>
+        <div id="quick-order-panel" class="quick-order-panel hidden">
+          <div class="panel-title" id="lbl-quick-order"></div>
+          <div class="panel-date" id="quick-order-date"></div>
+          <div class="qty-row">
+            <span class="qty-label" id="lbl-quick-meat"></span>
+            <button type="button" class="qty-btn minus" id="qo-meat-minus">−</button>
+            <input class="qty-display" id="qo-meat" type="number" min="0" max="10" value="0" readonly inputmode="numeric">
+            <button type="button" class="qty-btn plus" id="qo-meat-plus">+</button>
+          </div>
+          <div class="qty-row">
+            <span class="qty-label" id="lbl-quick-vegan"></span>
+            <button type="button" class="qty-btn minus" id="qo-vegan-minus">−</button>
+            <input class="qty-display" id="qo-vegan" type="number" min="0" max="10" value="0" readonly inputmode="numeric">
+            <button type="button" class="qty-btn plus" id="qo-vegan-plus">+</button>
+          </div>
+          <button type="button" class="btn btn-primary btn-full" id="quick-order-save" style="margin-top:10px;"></button>
+        </div>
+        <div id="employee-month-summary" class="employee-month-summary hidden">
+          <div class="ems-head">
+            <div class="ems-title" id="lbl-emp-month-report"></div>
+          </div>
+          <div class="ems-nav">
+            <button type="button" class="ems-nav-btn" id="ems-prev-month" aria-label="">‹</button>
+            <div class="ems-month" id="ems-month-label"></div>
+            <button type="button" class="ems-nav-btn" id="ems-next-month" aria-label="">›</button>
+            <button type="button" class="ems-nav-current" id="ems-this-month"></button>
+          </div>
+          <div class="ems-grid">
+            <div class="ems-stat">
+              <div class="ems-k" id="lbl-emp-month-orders"></div>
+              <div class="ems-v" id="ems-orders">0</div>
+            </div>
+            <div class="ems-stat ems-stat--deduct">
+              <div class="ems-k" id="lbl-emp-month-deduct"></div>
+              <div class="ems-v" id="ems-deduct">0 ₾</div>
+            </div>
+          </div>
+          <p class="ems-note" id="lbl-emp-month-note"></p>
+        </div>
         <div class="quick-day-lists">
           <div class="quick-day-card">
             <h4 id="lbl-today-orders"></h4>
@@ -366,7 +513,7 @@
           </div>
         </div>
       </div>
-      <div id="employee-calendar" class="hidden">
+      <div id="employee-calendar" class="hidden field-block">
         <div class="cal-header">
           <button class="cal-nav" id="prev-month-btn">‹</button>
           <div class="cal-title" id="current-month"></div>
@@ -385,22 +532,25 @@
           <div class="history-list" id="employee-history-list"></div>
         </div>
       </div>
+      </div>
     </div>
   </div>
 
   <!-- MANAGER MODE -->
   <div id="mode-manager" class="hidden">
     <div class="card card-wide">
-      <div class="section-header">
-        <div>
-          <div class="card-title" id="lbl-report-title"></div>
-          <div class="card-subtitle">🏢 Fibercell Technology</div>
+      <div class="card-header card-header--split">
+        <img src="assets/logo.svg" alt="" class="logo-mark" width="40" height="39">
+        <div class="card-header-body">
+          <img src="assets/logo-desc_black.svg" alt="Fibercell Technology" class="logo-wordmark">
+          <h1 class="card-title" id="lbl-report-title"></h1>
         </div>
         <div class="section-header-btns">
           <button class="btn btn-outline" onclick="showEmployeesModal()" id="lbl-btn-employees"></button>
           <button class="btn btn-ghost" onclick="exitManager()" id="lbl-btn-exit"></button>
         </div>
       </div>
+      <div class="card-body">
       <div class="filters-grid">
         <div>
           <label class="field-label" id="lbl-filter-date"></label>
@@ -450,7 +600,7 @@
         <div class="manager-tools-row">
           <div>
             <label class="field-label" id="lbl-filter-search"></label>
-            <input type="text" id="filter-search" oninput="updateManagerReport()" placeholder="...">
+            <input type="text" id="filter-search" oninput="updateManagerReport()" placeholder="">
           </div>
           <div>
             <label class="field-label" id="lbl-filter-from"></label>
@@ -495,19 +645,24 @@
         <div class="stat-card green"><div class="stat-label" id="lbl-company-pays"></div><div class="stat-value" id="total-company-pays">0 ₾</div></div>
         <div class="stat-card red"><div class="stat-label" id="lbl-employees-pay"></div><div class="stat-value" id="total-employees-pay">0 ₾</div></div>
       </div>
+      </div>
     </div>
   </div>
 
   <!-- COOK MODE -->
   <div id="mode-cook" class="hidden">
     <div class="card card-wide">
-      <div class="section-header">
-        <div>
-          <div class="card-title" id="lbl-cook-title"></div>
-          <div class="card-subtitle">🏢 Fibercell Technology</div>
+      <div class="card-header card-header--split">
+        <img src="assets/logo.svg" alt="" class="logo-mark" width="40" height="39">
+        <div class="card-header-body">
+          <img src="assets/logo-desc_black.svg" alt="Fibercell Technology" class="logo-wordmark">
+          <h1 class="card-title" id="lbl-cook-title"></h1>
         </div>
-        <button class="btn btn-ghost" onclick="exitCook()" id="lbl-btn-back"></button>
+        <div class="section-header-btns">
+          <button class="btn btn-ghost" onclick="exitCook()" id="lbl-btn-back"></button>
+        </div>
       </div>
+      <div class="card-body">
       <div class="day-nav">
         <h2 id="cook-date"></h2>
         <button class="btn btn-primary" onclick="cookDay(-1)" id="lbl-prev-day"></button>
@@ -548,6 +703,7 @@
         <h3 id="lbl-detailed-list"></h3>
         <div id="cook-details"></div>
       </div>
+      </div>
     </div>
   </div>
 
@@ -556,7 +712,7 @@
 <!-- Firebase SDK -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getFirestore, collection, doc, onSnapshot, setDoc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  import { getFirestore, collection, doc, onSnapshot, setDoc, deleteDoc, getDoc, getDocs, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
   import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
   const firebaseConfig = {
@@ -580,16 +736,138 @@
   window._setDoc = setDoc;
   window._deleteDoc = deleteDoc;
   window._getDoc = getDoc;
+  window._getDocs = getDocs;
   window._onSnapshot = onSnapshot;
 
+  function orderDocId(employee, date) {
+    return date + '__' + employee.replace(/\//g, '-');
+  }
+
+  function parseOrderDoc(docSnap) {
+    const d = docSnap.data();
+    if (typeof d.meat !== 'number' && typeof d.vegan !== 'number') return null;
+    const meat = d.meat || 0;
+    const vegan = d.vegan || 0;
+    if (!d.employee_name || !d.order_date || (meat === 0 && vegan === 0)) return null;
+    return { id: docSnap.id, employee_name: d.employee_name, order_date: d.order_date, meat, vegan };
+  }
+
+  async function migrateLegacyOrders(docs) {
+    const legacyPortions = docs.filter(d => {
+      const data = d.data();
+      return data.food_category && data.food_category !== 'accepted_marker' && typeof data.meat !== 'number';
+    });
+    const legacyAccepted = docs.filter(d => {
+      const data = d.data();
+      return data.order_status === 'accepted_marker' || data.food_category === 'accepted_marker';
+    });
+    if (!legacyPortions.length && !legacyAccepted.length) return;
+
+    const grouped = {};
+    legacyPortions.forEach(d => {
+      const data = d.data();
+      const key = data.employee_name + '|' + data.order_date;
+      if (!grouped[key]) {
+        grouped[key] = { employee_name: data.employee_name, order_date: data.order_date, meat: 0, vegan: 0, deleteIds: [] };
+      }
+      grouped[key].deleteIds.push(d.id);
+      if (data.food_category === 'meat') grouped[key].meat++;
+      else if (data.food_category === 'vegan') grouped[key].vegan++;
+    });
+
+    let batch = writeBatch(db);
+    let ops = 0;
+    const flush = async () => {
+      if (!ops) return;
+      await batch.commit();
+      batch = writeBatch(db);
+      ops = 0;
+    };
+
+    for (const g of Object.values(grouped)) {
+      batch.set(doc(db, 'orders', orderDocId(g.employee_name, g.order_date)), {
+        employee_name: g.employee_name,
+        order_date: g.order_date,
+        meat: g.meat,
+        vegan: g.vegan,
+        updated_at: new Date().toISOString()
+      });
+      ops++;
+      for (const delId of g.deleteIds) {
+        batch.delete(doc(db, 'orders', delId));
+        ops++;
+        if (ops >= 450) await flush();
+      }
+    }
+
+    for (const d of legacyAccepted) {
+      const date = d.data().order_date;
+      if (date) {
+        batch.set(doc(db, 'accepted_days', date), { accepted: true, accepted_at: new Date().toISOString() });
+        ops++;
+      }
+      batch.delete(d.ref);
+      ops++;
+      if (ops >= 450) await flush();
+    }
+
+    await flush();
+  }
+
+  async function loadOrderData() {
+    const ordersSnap = await getDocs(collection(db, 'orders'));
+    await migrateLegacyOrders(ordersSnap.docs);
+    const freshSnap = await getDocs(collection(db, 'orders'));
+    const acceptedSnap = await getDocs(collection(db, 'accepted_days'));
+    return {
+      entries: freshSnap.docs.map(parseOrderDoc).filter(Boolean),
+      accepted: acceptedSnap.docs.map(d => d.id)
+    };
+  }
+
+  function applyOrderSnapshot(orderSnap) {
+    if (typeof orderEntries === 'undefined') return;
+    orderEntries.length = 0;
+    orderSnap.docs.forEach(d => {
+      const e = parseOrderDoc(d);
+      if (e) orderEntries.push(e);
+    });
+  }
+
+  function applyAcceptedSnapshot(accSnap) {
+    if (typeof acceptedDates === 'undefined') return;
+    acceptedDates.clear();
+    accSnap.docs.forEach(d => acceptedDates.add(d.id));
+  }
+
+  function refreshOrderUI() {
+    if (typeof renderCalendar === 'function' && selectedEmployee) { renderCalendar(); updateEmployeeOrders(); }
+    if (typeof updateQuickDayLists === 'function') updateQuickDayLists();
+    if (typeof updateQuickOrderPanel === 'function') updateQuickOrderPanel();
+    if (typeof updateDeadlineBanner === 'function') updateDeadlineBanner();
+    if (typeof updateEmployeeMonthSummary === 'function') updateEmployeeMonthSummary();
+    if (typeof updateManagerReport === 'function' && currentMode === 'manager') { updateManagerReport(); populateEmployeeFilter(); }
+    if (typeof updateCookDisplay === 'function' && currentMode === 'cook') updateCookDisplay();
+    const jov = document.getElementById('juliet-ov');
+    if (jov && typeof window._julietRender === 'function') window._julietRender();
+  }
+
   // Show loading indicator
+  window.edaSetLang(localStorage.getItem('edaFC_lang') || 'ru');
+  const loadMsg = window.t('loading_connect');
   document.body.insertAdjacentHTML('beforeend', `
-    <div id="fb-loading" style="position:fixed;inset:0;background:rgba(15,31,92,0.92);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
-      <div style="width:48px;height:48px;border:4px solid rgba(255,255,255,0.2);border-top-color:white;border-radius:50%;animation:spin 0.8s linear infinite;"></div>
-      <p style="color:white;font-family:Manrope,sans-serif;font-weight:700;font-size:16px;">Подключение к базе данных...</p>
+    <div id="fb-loading" style="position:fixed;inset:0;background:rgba(255,255,255,0.96);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+      <img src="assets/logo.svg" alt="" width="56" height="54" style="margin-bottom:4px;">
+      <div style="width:40px;height:40px;border:4px solid #FFE8DB;border-top-color:#FF5500;border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+      <p style="color:#171717;font-family:Manrope,sans-serif;font-weight:700;font-size:16px;">${loadMsg}</p>
       <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
     </div>
   `);
+
+  const DEFAULT_ACCESS_HASHES = {
+    managerHash: '967ee0f935933376dcf5c80909ca8fa5edc27e63af6ae381e63759a9c29742b9',
+    cookHash: '0c601c3a223fa488036ffc2198a7dd9c43d6caf551ac82993119369ae2048e7c'
+  };
 
   // Load all data from Firestore, then boot the app
   async function loadAllData() {
@@ -597,11 +875,20 @@
       // Authenticate anonymously so Firestore security rules are satisfied
       await signInAnonymously(auth);
 
-      // Load orders (initial snapshot)
-      const ordersSnap = await new Promise(resolve => {
-        const unsub = onSnapshot(collection(db, 'orders'), snap => { unsub(); resolve(snap); });
-      });
-      window._allOrders = ordersSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+      // Ensure access hashes exist (no plain-text passwords in source)
+      const accessDoc = await getDoc(doc(db, 'config', 'access'));
+      if (!accessDoc.exists()) {
+        await setDoc(doc(db, 'config', 'access'), DEFAULT_ACCESS_HASHES);
+        window._accessHashes = { manager: DEFAULT_ACCESS_HASHES.managerHash, cook: DEFAULT_ACCESS_HASHES.cookHash };
+      } else {
+        const d = accessDoc.data();
+        window._accessHashes = { manager: d.managerHash || '', cook: d.cookHash || '' };
+      }
+
+      // Load orders (with legacy migration) and accepted days
+      const orderData = await loadOrderData();
+      window._orderEntries = orderData.entries;
+      window._acceptedDates = orderData.accepted;
 
       // Load passwords (initial)
       const pwdDoc = await getDoc(doc(db, 'config', 'passwords'));
@@ -611,21 +898,23 @@
       const empDoc = await getDoc(doc(db, 'config', 'employees'));
       if (empDoc.exists() && empDoc.data().list && empDoc.data().list.length) {
         window._employees = empDoc.data().list;
+        window._employeeNamesKa = empDoc.data().namesKa || {};
       } else {
-        window._employees = null; // will use DEFAULT_EMPLOYEES
+        window._employees = null;
+        window._employeeNamesKa = null;
       }
 
-      // Subscribe to real-time orders updates
+      // Subscribe to real-time order updates
       onSnapshot(collection(db, 'orders'), snap => {
         if (!window._firebaseReady) return;
-        allOrders.length = 0;
-        snap.docs.forEach(d => allOrders.push({ id: d.id, ...d.data() }));
-        if (typeof renderCalendar === 'function' && selectedEmployee) { renderCalendar(); updateEmployeeOrders(); }
-        if (typeof updateQuickDayLists === 'function') updateQuickDayLists();
-        if (typeof updateManagerReport === 'function' && currentMode === 'manager') { updateManagerReport(); populateEmployeeFilter(); }
-        if (typeof updateCookDisplay === 'function' && currentMode === 'cook') updateCookDisplay();
-        const jov = document.getElementById('juliet-ov');
-        if (jov && typeof window._julietRender === 'function') window._julietRender();
+        applyOrderSnapshot(snap);
+        refreshOrderUI();
+      });
+
+      onSnapshot(collection(db, 'accepted_days'), snap => {
+        if (!window._firebaseReady) return;
+        applyAcceptedSnapshot(snap);
+        refreshOrderUI();
       });
 
       // Subscribe to real-time employees updates from Firestore
@@ -634,6 +923,10 @@
         if (!snap.exists() || !snap.data().list || !snap.data().list.length) return;
         employees.length = 0;
         employees.push(...snap.data().list);
+        if (snap.data().namesKa) {
+          Object.keys(employeeNamesKa).forEach(k => delete employeeNamesKa[k]);
+          Object.assign(employeeNamesKa, snap.data().namesKa);
+        }
         if (typeof populateEmployeeSelect === 'function') populateEmployeeSelect();
         if (typeof populateEmployeeFilter === 'function') populateEmployeeFilter();
       });
@@ -651,10 +944,11 @@
       window.dispatchEvent(new Event('firebase-ready'));
     } catch(e) {
       console.error('Firebase error:', e);
+      window.edaSetLang(localStorage.getItem('edaFC_lang') || 'ru');
+      const errMsg = window.t('loading_error');
       document.getElementById('fb-loading').innerHTML = `
         <p style="color:#fca5a5;font-family:Manrope,sans-serif;font-weight:700;font-size:15px;text-align:center;padding:20px;">
-          ❌ Ошибка подключения к базе данных.<br><br>
-          Проверьте интернет и перезагрузите страницу.
+          ${errMsg}
         </p>`;
     }
   }
@@ -666,23 +960,129 @@
 // =============================================
 // STORAGE — Firebase версия
 // =============================================
-const MANAGER_PASSWORD = 'Nika2026';
-const COOK_PASSWORD = 'Juli2026';
 const JULIET_EMPLOYEE = 'Церетели Нана';
+const LS_EMPLOYEE_KEY = 'edaFC_employee';
+const LS_LANG_KEY = 'edaFC_lang';
+const LS_EMP_AUTH_KEY = 'edaFC_emp_auth';
+const LS_ACCESS_AUTH_KEY = 'edaFC_access_auth';
+
+let accessHashes = { manager: '', cook: '' };
 
 // These will be populated after Firebase loads
-let allOrders = [];
+let orderEntries = [];
+const acceptedDates = new Set();
 let employeePasswords = {};
 let employees = [];
+let employeeNamesKa = {};
 
-async function saveOrders() { /* handled via createOrder/deleteOrder */ }
+async function hashPassword(pwd) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pwd));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function isPasswordHash(val) {
+  return typeof val === 'string' && val.length === 64 && /^[a-f0-9]+$/.test(val);
+}
+
+async function verifyAccessPassword(role, pwd) {
+  if (!accessHashes[role]) return false;
+  return (await hashPassword(pwd)) === accessHashes[role];
+}
+
+async function verifyEmployeePassword(emp, pwd) {
+  const stored = employeePasswords[emp];
+  if (!stored) return false;
+  if (isPasswordHash(stored)) return (await hashPassword(pwd)) === stored;
+  if (pwd === stored) {
+    employeePasswords[emp] = await hashPassword(pwd);
+    await savePasswords();
+    return true;
+  }
+  return false;
+}
+
+function canAutoAuthEmployee(emp) {
+  if (!emp || !employeePasswords[emp]) return false;
+  try {
+    const data = JSON.parse(localStorage.getItem(LS_EMP_AUTH_KEY) || 'null');
+    return data && data.employee === emp && isPasswordHash(data.hash) && employeePasswords[emp] === data.hash;
+  } catch (e) { return false; }
+}
+
+async function saveEmployeeAuthFromPwd(emp, pwd) {
+  const hash = await hashPassword(pwd);
+  if (employeePasswords[emp] === hash) {
+    localStorage.setItem(LS_EMP_AUTH_KEY, JSON.stringify({ employee: emp, hash }));
+  }
+}
+
+function clearEmployeeAuth(emp) {
+  try {
+    const data = JSON.parse(localStorage.getItem(LS_EMP_AUTH_KEY) || 'null');
+    if (!data) return;
+    if (!emp || data.employee === emp) localStorage.removeItem(LS_EMP_AUTH_KEY);
+  } catch (e) { localStorage.removeItem(LS_EMP_AUTH_KEY); }
+}
+
+function migrateEmployeeAuth(oldName, newName) {
+  try {
+    const data = JSON.parse(localStorage.getItem(LS_EMP_AUTH_KEY) || 'null');
+    if (data && data.employee === oldName) {
+      data.employee = newName;
+      localStorage.setItem(LS_EMP_AUTH_KEY, JSON.stringify(data));
+    }
+  } catch (e) { /* ignore */ }
+}
+
+function canAutoAuthAccess(role) {
+  if (!accessHashes[role]) return false;
+  try {
+    const data = JSON.parse(localStorage.getItem(LS_ACCESS_AUTH_KEY) || '{}');
+    return data[role] === accessHashes[role];
+  } catch (e) { return false; }
+}
+
+async function saveAccessAuthFromPwd(role, pwd) {
+  const hash = await hashPassword(pwd);
+  if (accessHashes[role] === hash) {
+    let data = {};
+    try { data = JSON.parse(localStorage.getItem(LS_ACCESS_AUTH_KEY) || '{}'); } catch (e) {}
+    data[role] = hash;
+    localStorage.setItem(LS_ACCESS_AUTH_KEY, JSON.stringify(data));
+  }
+}
+
+async function safeFirebase(label, fn, retries = 1) {
+  let lastErr;
+  for (let i = 0; i <= retries; i++) {
+    try {
+      return await fn();
+    } catch (e) {
+      lastErr = e;
+      console.error(label, e);
+      if (i < retries) await new Promise(r => setTimeout(r, 800));
+    }
+  }
+  notify(t('err_save'));
+  throw lastErr;
+}
+
+function empDisplayName(emp) {
+  return (lang === 'ka' && employeeNamesKa[emp]) ? employeeNamesKa[emp] : emp;
+}
+
+async function saveOrders() { /* handled via setOrderCounts */ }
 
 async function savePasswords() {
-  await window._setDoc(window._doc(window._db, 'config', 'passwords'), employeePasswords);
+  await safeFirebase('savePasswords', () =>
+    window._setDoc(window._doc(window._db, 'config', 'passwords'), employeePasswords)
+  );
 }
 
 async function saveEmployees() {
-  await window._setDoc(window._doc(window._db, 'config', 'employees'), { list: employees });
+  await safeFirebase('saveEmployees', () =>
+    window._setDoc(window._doc(window._db, 'config', 'employees'), { list: employees, namesKa: employeeNamesKa })
+  );
 }
 
 const DEFAULT_EMPLOYEES = [
@@ -757,7 +1157,7 @@ const DEFAULT_EMPLOYEES = [
   "Чорголашвили Георги"
 ];
 
-const EMPLOYEE_NAMES_KA = {
+const DEFAULT_EMPLOYEE_NAMES_KA = {
   "Абакумов Юрий": "აბაკუმოვ იური",
   "Асатурян Мигели": "ასატურიანი მიგელი",
   "Ахметханов Наиль": "ახმეტხანოვ ნაილ",
@@ -830,16 +1230,101 @@ const EMPLOYEE_NAMES_KA = {
 };
 
 // Data loaded from Firebase — initialized after 'firebase-ready' event
-// allOrders, employeePasswords, employees declared in Firebase block above
 
-async function createOrder(data) {
-  const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
-  const o = { ...data, id };
-  await window._setDoc(window._doc(window._db, 'orders', id), o);
-  return o;
+function orderDocId(employee, date) {
+  return date + '__' + employee.replace(/\//g, '-');
 }
-async function deleteOrder(id) {
-  await window._deleteDoc(window._doc(window._db, 'orders', id));
+
+function getOrderEntry(employee, date) {
+  return orderEntries.find(e => e.employee_name === employee && e.order_date === date);
+}
+
+function getMeatCount(employee, date) {
+  return getOrderEntry(employee, date)?.meat || 0;
+}
+
+function getVeganCount(employee, date) {
+  return getOrderEntry(employee, date)?.vegan || 0;
+}
+
+function isDateAccepted(date) {
+  return acceptedDates.has(date);
+}
+
+function getEntriesForDate(date) {
+  return orderEntries.filter(e => e.order_date === date && (e.meat > 0 || e.vegan > 0));
+}
+
+function getEntriesForEmployee(employee) {
+  return orderEntries.filter(e => e.employee_name === employee && (e.meat > 0 || e.vegan > 0));
+}
+
+function entryToDetailedRows(entry) {
+  const rows = [];
+  let pos = 0;
+  for (let i = 0; i < entry.meat; i++) {
+    pos++;
+    rows.push({
+      name: entry.employee_name, date: entry.order_date, category: 'meat',
+      position: pos, companyPays: pos === 1 ? 5 : 0, employeePays: pos === 1 ? 5 : 10
+    });
+  }
+  for (let i = 0; i < entry.vegan; i++) {
+    pos++;
+    rows.push({
+      name: entry.employee_name, date: entry.order_date, category: 'vegan',
+      position: pos, companyPays: pos === 1 ? 5 : 0, employeePays: pos === 1 ? 5 : 10
+    });
+  }
+  return rows;
+}
+
+function getAllDetailedRows() {
+  return orderEntries.filter(e => e.meat > 0 || e.vegan > 0).flatMap(entryToDetailedRows);
+}
+
+async function setOrderCounts(employee, date, meat, vegan) {
+  const id = orderDocId(employee, date);
+  meat = Math.max(0, Math.min(10, meat));
+  vegan = Math.max(0, Math.min(10, vegan));
+  if (meat === 0 && vegan === 0) {
+    if (getOrderEntry(employee, date)) {
+      await safeFirebase('deleteOrder', () => window._deleteDoc(window._doc(window._db, 'orders', id)));
+    }
+  } else {
+    await safeFirebase('setOrder', () => window._setDoc(window._doc(window._db, 'orders', id), {
+      employee_name: employee,
+      order_date: date,
+      meat,
+      vegan,
+      updated_at: new Date().toISOString()
+    }));
+  }
+}
+
+async function acceptDate(dateStr) {
+  await safeFirebase('acceptDate', () => window._setDoc(window._doc(window._db, 'accepted_days', dateStr), {
+    accepted: true,
+    accepted_at: new Date().toISOString()
+  }));
+}
+
+async function renameEmployeeOrders(oldName, newName) {
+  const toMove = orderEntries.filter(e => e.employee_name === oldName);
+  await Promise.all(toMove.map(async e => {
+    const oldId = e.id || orderDocId(oldName, e.order_date);
+    const newId = orderDocId(newName, e.order_date);
+    await safeFirebase('renameOrder', () => window._setDoc(window._doc(window._db, 'orders', newId), {
+      employee_name: newName,
+      order_date: e.order_date,
+      meat: e.meat,
+      vegan: e.vegan,
+      updated_at: new Date().toISOString()
+    }));
+    if (oldId !== newId) {
+      await safeFirebase('deleteOrder', () => window._deleteDoc(window._doc(window._db, 'orders', oldId)));
+    }
+  }));
 }
 
 // =============================================
@@ -848,6 +1333,11 @@ async function deleteOrder(id) {
 let lang = 'ru';
 const T = {
   ru: {
+    page_title:'Fibercell Technology — Заказы обедов',
+    mode_bar_aria:'Режим работы',
+    filter_search_ph:'Имя или дата...',
+    loading_connect:'Подключение к базе данных...',
+    loading_error:'❌ Ошибка подключения к базе данных.<br><br>Проверьте интернет и перезагрузите страницу.',
     app_title:'Заказы обедов у Джульетты',
     btn_employee:'👤 Сотрудник', btn_manager:'📊 Менеджер', btn_cook:'👨‍🍳 Повар',
     select_name:'Выберите ваше имя:', select_option:'-- Выберите имя --',
@@ -899,6 +1389,13 @@ const T = {
     h_total:'Всего',
     h_meat:'Мясо',
     h_vegan:'Веган',
+    emp_month_report:'Сводка за месяц',
+    emp_month_orders:'Порций',
+    emp_month_deduct:'Удержание с з/п',
+    emp_month_note:'1-я порция в день — 5 ₾, каждая следующая — 10 ₾',
+    emp_month_this:'Этот месяц',
+    emp_month_prev:'Предыдущий месяц',
+    emp_month_next:'Следующий месяц',
     cook_day_orders:'За день: заказов',
     cook_day_money:'За день: сумма',
     cook_month_orders:'За месяц: заказов',
@@ -938,6 +1435,8 @@ const T = {
     accept_btn:'✓ Принять заказ',
     orders_day:'Заказы на день',
     wd:['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],
+    months:['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'],
+    weekdays_long:['понедельник','вторник','среда','четверг','пятница','суббота','воскресенье'],
     ml:'ru-RU', dl:'ru-RU',
     err_pwd_empty:'Пожалуйста, введите пароль',
     err_pwd_match:'Пароли не совпадают!',
@@ -955,8 +1454,28 @@ const T = {
     ok_accepted:'Заказ принят! Изменения больше невозможны.',
     enter_as_manager:'Войти как менеджер',
     manager_edit_mode:'Режим менеджера: можно редактировать архив и заказы без ограничения времени.',
+    total_label:'Итого',
+    history_days:'дн.',
+    deadline_closed_title:'🕕 Приём заказов закрыт',
+    deadline_closed_desc:'Заказы принимаются до 18:00 по Тбилиси (сейчас {time}). Изменение невозможно.',
+    deadline_cell_title:'Приём заказов закрыт (после 18:00)',
+    deadline_open_title:'⏰ Заказ на завтра открыт',
+    deadline_open_desc:'Принимается до 18:00 сегодня по Тбилиси. Сейчас: {time}',
+    quick_order_title:'⚡ Быстрый заказ на завтра',
+    quick_order_save:'💾 Сохранить заказ на завтра',
+    quick_order_locked:'Заказ на завтра закрыт',
+    saving:'⏳ Сохранение...',
+    err_save:'Не удалось сохранить. Проверьте интернет и попробуйте снова.',
+    ok_order_saved:'Заказ сохранён!',
+    csv_meat:'Мясо',
+    csv_vegan:'Веган',
   },
   ka: {
+    page_title:'Fibercell Technology — სადილის შეკვეთები',
+    mode_bar_aria:'სამუშაო რეჟიმი',
+    filter_search_ph:'სახელი ან თარიღი...',
+    loading_connect:'მონაცემთა ბაზასთან დაკავშირება...',
+    loading_error:'❌ მონაცემთა ბაზასთან დაკავშირება ვერ მოხერხდა.<br><br>შეამოწმეთ ინტერნეტი და გადატვირთეთ გვერდი.',
     app_title:'ჯულიეტის სადილის ბრძანებები',
     btn_employee:'👤 თანამშრომელი', btn_manager:'📊 მენეჯერი', btn_cook:'👨‍🍳 შეფი',
     select_name:'აირჩიეთ თქვენი სახელი:', select_option:'-- აირჩიეთ სახელი --',
@@ -1008,6 +1527,13 @@ const T = {
     h_total:'სულ',
     h_meat:'ხორცი',
     h_vegan:'ვეგანი',
+    emp_month_report:'თვის შეჯამება',
+    emp_month_orders:'პორცია',
+    emp_month_deduct:'ხელფასიდან გამოქვითვა',
+    emp_month_note:'დღეში პირველი პორცია — 5 ₾, შემდეგი — 10 ₾',
+    emp_month_this:'ეს თვე',
+    emp_month_prev:'წინა თვე',
+    emp_month_next:'შემდეგი თვე',
     cook_day_orders:'დღე: შეკვეთები',
     cook_day_money:'დღე: თანხა',
     cook_month_orders:'თვე: შეკვეთები',
@@ -1047,6 +1573,8 @@ const T = {
     accept_btn:'✓ ბრძანების მიღება',
     orders_day:'დღის ბრძანებები',
     wd:['ორ','სამ','ოთხ','ხუთ','პარ','შაბ','კვ'],
+    months:['იანვარი','თებერვალი','მარტი','აპრილი','მაისი','ივნისი','ივლისი','აგვისტო','სექტემბერი','ოქტომბერი','ნოემბერი','დეკემბერი'],
+    weekdays_long:['ორშაბათი','სამშაბათი','ოთხშაბათი','ხუთშაბათი','პარასკევი','შაბათი','კვირა'],
     ml:'ka-GE', dl:'ka-GE',
     err_pwd_empty:'გთხოვთ შეიყვანოთ პაროლი',
     err_pwd_match:'პაროლები არ ემთხვევა!',
@@ -1064,9 +1592,58 @@ const T = {
     ok_accepted:'ბრძანება მიღებულია!',
     enter_as_manager:'მენეჯერად შესვლა',
     manager_edit_mode:'მენეჯერის რეჟიმი: შესაძლებელია არქივის და დროით შეზღუდული შეკვეთების რედაქტირება.',
+    total_label:'სულ',
+    history_days:'დღე',
+    deadline_closed_title:'🕕 შეკვეთების მიღება დახურულია',
+    deadline_closed_desc:'შეკვეთები მიღებულია 18:00-მდე თბილისის დროით (ახლა {time}). ცვლილება შეუძლებელია.',
+    deadline_cell_title:'შეკვეთების მიღება დახურულია (18:00-ის შემდეგ)',
+    deadline_open_title:'⏰ ხვალინდელი შეკვეთა ღიაა',
+    deadline_open_desc:'მიღება 18:00-მდე დღეს თბილისის დროით. ახლა: {time}',
+    quick_order_title:'⚡ სწრაფი შეკვეთა ხვალ',
+    quick_order_save:'💾 შენახვა ხვალის შეკვეთა',
+    quick_order_locked:'ხვალინდელი შეკვეთა დახურულია',
+    saving:'⏳ შენახვა...',
+    err_save:'შენახვა ვერ მოხერხდა. შეამოწმეთ ინტერნეტი და სცადეთ თავიდან.',
+    ok_order_saved:'შეკვეთა შენახულია!',
+    csv_meat:'ხორცი',
+    csv_vegan:'ვეგანი',
   }
 };
-function t(k) { return (T[lang] && T[lang][k] !== undefined) ? T[lang][k] : (T['ru'][k] || k); }
+function t(k, vars) {
+  let s = (T[lang] && T[lang][k] !== undefined) ? T[lang][k] : (T['ru'][k] || k);
+  if (vars) Object.entries(vars).forEach(([kk, vv]) => { s = s.replace('{' + kk + '}', vv); });
+  return s;
+}
+window.t = t;
+window.edaSetLang = l => { lang = l; };
+
+function parseAppDate(input) {
+  if (input instanceof Date) return new Date(input.getTime());
+  if (typeof input === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(input)) return new Date(input + 'T00:00:00');
+  return new Date(input);
+}
+
+function formatAppDate(input, preset = 'date') {
+  const d = parseAppDate(input);
+  const pack = T[lang] || T.ru;
+  const months = pack.months || T.ru.months;
+  const wdLong = pack.weekdays_long || T.ru.weekdays_long;
+  const day = d.getDate();
+  const month = months[d.getMonth()];
+  const year = d.getFullYear();
+  const dow = (d.getDay() + 6) % 7;
+  const dd = String(day).padStart(2, '0');
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+
+  switch (preset) {
+    case 'monthYear': return `${month} ${year}`;
+    case 'full': return `${wdLong[dow]}, ${day} ${month} ${year}`;
+    case 'weekdayDayMonth': return `${wdLong[dow]}, ${day} ${month}`;
+    case 'short': return `${t('wd')[dow]}, ${dd}.${mm}.${year}`;
+    case 'date': return `${dd}.${mm}.${year}`;
+    default: return `${day} ${month} ${year}`;
+  }
+}
 
 // =============================================
 // STATE
@@ -1076,21 +1653,42 @@ let selectedEmployee = null;
 let currentMonth = new Date();
 let cookCurrentDate = new Date(); cookCurrentDate.setHours(0,0,0,0);
 let employeeManagerOverride = false;
+let employeeSummaryMonth = null;
 
 // =============================================
 // LANG SWITCH
 // =============================================
+function refreshDynamicTranslations() {
+  if (typeof updateQuickDayLists === 'function') updateQuickDayLists();
+  const deadlineBanner = document.getElementById('deadline-banner');
+  if (deadlineBanner && !deadlineBanner.classList.contains('hidden') && typeof updateDeadlineBanner === 'function') {
+    updateDeadlineBanner();
+  }
+  const quickPanel = document.getElementById('quick-order-panel');
+  if (quickPanel && !quickPanel.classList.contains('hidden') && typeof updateQuickOrderPanel === 'function') {
+    updateQuickOrderPanel();
+  }
+  const monthSummary = document.getElementById('employee-month-summary');
+  if (monthSummary && !monthSummary.classList.contains('hidden') && typeof updateEmployeeMonthSummary === 'function') {
+    updateEmployeeMonthSummary();
+  }
+  if (selectedEmployee && document.getElementById('employee-calendar') && !document.getElementById('employee-calendar').classList.contains('hidden')) {
+    if (typeof renderCalendar === 'function') renderCalendar();
+    if (typeof updateEmployeeOrders === 'function') updateEmployeeOrders();
+  }
+  if (document.getElementById('juliet-ov') && typeof window._julietRender === 'function') window._julietRender();
+  if (currentMode === 'manager' && typeof updateManagerReport === 'function') updateManagerReport();
+  if (currentMode === 'cook' && typeof updateCookDisplay === 'function') updateCookDisplay();
+}
+
 function setLang(l) {
   lang = l;
+  localStorage.setItem(LS_LANG_KEY, l);
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
   applyTranslations();
-  if (typeof updateQuickDayLists === 'function') updateQuickDayLists();
-  populateEmployeeSelect(); populateEmployeeFilter();
-  if (currentMode === 'employee' && selectedEmployee) {
-    renderCalendar(); updateEmployeeOrders();
-  }
-  if (currentMode === 'manager') updateManagerReport();
-  if (currentMode === 'cook') updateCookDisplay();
+  populateEmployeeSelect();
+  populateEmployeeFilter();
+  refreshDynamicTranslations();
 }
 
 function applyTranslations() {
@@ -1108,6 +1706,9 @@ function applyTranslations() {
     'lbl-quick-today':'quick_today','lbl-quick-tomorrow':'quick_tomorrow','lbl-quick-week':'quick_week','lbl-quick-month':'quick_month',
     'lbl-quick-next-week':'quick_next_week','lbl-quick-prev-month':'quick_prev_month','lbl-quick-weekend':'quick_weekend',
     'lbl-h-total':'h_total','lbl-h-meat':'h_meat','lbl-h-vegan':'h_vegan',
+    'lbl-emp-month-report':'emp_month_report','lbl-emp-month-orders':'emp_month_orders',
+    'lbl-emp-month-deduct':'emp_month_deduct',
+    'lbl-emp-month-note':'emp_month_note','ems-this-month':'emp_month_this',
     'lbl-btn-reset':'btn_reset','lbl-btn-copy':'btn_copy','lbl-btn-csv':'btn_csv','lbl-btn-salary':'btn_salary',
     'th-name':'th_name','th-date':'th_date','th-cat':'th_cat','th-pos':'th_pos',
     'th-price':'th_price','th-company':'th_company','th-employee':'th_employee',
@@ -1118,12 +1719,20 @@ function applyTranslations() {
     'lbl-detailed-list':'detailed_list','lbl-cook-day-orders':'cook_day_orders',
     'lbl-cook-day-money':'cook_day_money','lbl-cook-month-orders':'cook_month_orders',
     'lbl-cook-month-money':'cook_month_money',
-    'lbl-meat-cook':'meat','lbl-vegan-cook':'vegan'
+    'lbl-meat-cook':'meat','lbl-vegan-cook':'vegan',
+    'lbl-quick-order':'quick_order_title','lbl-quick-meat':'meat','lbl-quick-vegan':'vegan',
+    'quick-order-save':'quick_order_save'
   };
   Object.entries(ids).forEach(([id, key]) => {
     const el = document.getElementById(id);
     if (el) el.textContent = t(key);
   });
+  document.documentElement.lang = lang === 'ka' ? 'ka' : 'ru';
+  document.title = t('page_title');
+  const modeBar = document.getElementById('mode-bar-nav');
+  if (modeBar) modeBar.setAttribute('aria-label', t('mode_bar_aria'));
+  const searchInput = document.getElementById('filter-search');
+  if (searchInput) searchInput.placeholder = t('filter_search_ph');
   const wr = document.getElementById('weekdays-row');
   if (wr) {
     wr.innerHTML = t('wd').map(d => `<div class="weekday">${d}</div>`).join('');
@@ -1134,8 +1743,16 @@ function applyTranslations() {
 // MODE SWITCHING
 // =============================================
 function switchMode(mode) {
-  if (mode === 'manager') { showPasswordModal(t('manager_login'), t('manager_login_desc'), () => activateMode('manager')); return; }
-  if (mode === 'cook') { showPasswordModal(t('cook_login'), t('cook_login_desc'), () => { activateMode('cook'); updateCookDisplay(); }, COOK_PASSWORD); return; }
+  if (mode === 'manager') {
+    if (canAutoAuthAccess('manager')) { activateMode('manager'); return; }
+    showPasswordModal(t('manager_login'), t('manager_login_desc'), () => activateMode('manager'), 'manager');
+    return;
+  }
+  if (mode === 'cook') {
+    if (canAutoAuthAccess('cook')) { activateMode('cook'); updateCookDisplay(); return; }
+    showPasswordModal(t('cook_login'), t('cook_login_desc'), () => { activateMode('cook'); updateCookDisplay(); }, 'cook');
+    return;
+  }
   activateMode('employee');
 }
 function activateMode(mode) {
@@ -1159,29 +1776,52 @@ function populateEmployeeSelect() {
   [...employees].sort().forEach(emp => {
     const o = document.createElement('option');
     o.value = emp;
-    o.textContent = (lang === 'ka' && EMPLOYEE_NAMES_KA[emp]) ? EMPLOYEE_NAMES_KA[emp] : emp;
+    o.textContent = empDisplayName(emp);
     sel.appendChild(o);
   });
   if (cur) sel.value = cur;
 }
 
-document.getElementById('employee-select').addEventListener('change', e => {
-  selectedEmployee = e.target.value;
+function saveSelectedEmployee(name) {
+  if (name) localStorage.setItem(LS_EMPLOYEE_KEY, name);
+  else localStorage.removeItem(LS_EMPLOYEE_KEY);
+}
+
+function onEmployeeAuthenticated() {
+  document.getElementById('employee-calendar').classList.remove('hidden');
+  document.getElementById('deadline-banner').classList.remove('hidden');
+  document.getElementById('quick-order-panel').classList.remove('hidden');
+  document.getElementById('employee-month-summary').classList.remove('hidden');
+  resetEmployeeSummaryMonth();
+  renderCalendar();
+  updateEmployeeOrders();
+  updateQuickDayLists();
+  updateDeadlineBanner();
+  updateQuickOrderPanel();
+  updateEmployeeMonthSummary();
+}
+
+function handleEmployeeSelect(name) {
+  selectedEmployee = name;
   employeeManagerOverride = false;
   document.getElementById('employee-calendar').classList.add('hidden');
+  document.getElementById('deadline-banner').classList.add('hidden');
+  document.getElementById('quick-order-panel').classList.add('hidden');
+  document.getElementById('employee-month-summary').classList.add('hidden');
+  saveSelectedEmployee(name);
   updateQuickDayLists();
-  if (!selectedEmployee) return;
-  if (employeePasswords[selectedEmployee]) {
-    showEnterPwdModal(selectedEmployee, () => {
-      document.getElementById('employee-calendar').classList.remove('hidden');
-      renderCalendar(); updateEmployeeOrders();
-    });
+  if (!name) return;
+  if (name === JULIET_EMPLOYEE) { showJulietMode(); return; }
+  if (employeePasswords[name]) {
+    if (canAutoAuthEmployee(name)) onEmployeeAuthenticated();
+    else showEnterPwdModal(name, onEmployeeAuthenticated);
   } else {
-    showCreatePwdModal(selectedEmployee, () => {
-      document.getElementById('employee-calendar').classList.remove('hidden');
-      renderCalendar(); updateEmployeeOrders();
-    });
+    showCreatePwdModal(name, onEmployeeAuthenticated);
   }
+}
+
+document.getElementById('employee-select').addEventListener('change', e => {
+  handleEmployeeSelect(e.target.value);
 });
 
 // =============================================
@@ -1198,10 +1838,73 @@ function toDateStr(d) {
   return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 }
 
+function getTomorrowDateStr() {
+  const now = getTbilisiNow();
+  const tomorrow = new Date(now);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  return toDateStr(tomorrow);
+}
+
+function getTbilisiTimeStr() {
+  const now = getTbilisiNow();
+  return now.getHours() + ':' + String(now.getMinutes()).padStart(2, '0');
+}
+
+function updateDeadlineBanner() {
+  const el = document.getElementById('deadline-banner');
+  if (!el || !selectedEmployee || selectedEmployee === JULIET_EMPLOYEE) return;
+  const tomorrowStr = getTomorrowDateStr();
+  const check = isOrderingAllowed(tomorrowStr);
+  const time = getTbilisiTimeStr();
+  if (check.allowed) {
+    el.className = 'deadline-banner open';
+    el.innerHTML = `<strong>${t('deadline_open_title')}</strong>${t('deadline_open_desc', { time })}`;
+  } else {
+    el.className = 'deadline-banner closed';
+    el.innerHTML = `<strong>${t('deadline_closed_title')}</strong>${t('deadline_closed_desc', { time })}`;
+  }
+}
+
+let quickOrderMeat = 0, quickOrderVegan = 0, quickOrderSnapshot = { meat: 0, vegan: 0 };
+
+function updateQuickOrderPanel() {
+  const panel = document.getElementById('quick-order-panel');
+  if (!panel || !selectedEmployee || selectedEmployee === JULIET_EMPLOYEE) return;
+  const tomorrowStr = getTomorrowDateStr();
+  quickOrderMeat = getMeatCount(selectedEmployee, tomorrowStr);
+  quickOrderVegan = getVeganCount(selectedEmployee, tomorrowStr);
+  quickOrderSnapshot = { meat: quickOrderMeat, vegan: quickOrderVegan };
+  document.getElementById('qo-meat').value = quickOrderMeat;
+  document.getElementById('qo-vegan').value = quickOrderVegan;
+  const d = new Date(tomorrowStr + 'T00:00:00');
+  document.getElementById('quick-order-date').textContent = formatAppDate(d, 'weekdayDayMonth');
+  const isAccepted = isDateAccepted(tomorrowStr);
+  const deadline = isOrderingAllowed(tomorrowStr);
+  const locked = employeeManagerOverride ? false : (isAccepted || !deadline.allowed);
+  panel.classList.toggle('locked', locked);
+  document.getElementById('quick-order-save').disabled = locked;
+  document.getElementById('quick-order-save').textContent = locked ? t('quick_order_locked') : t('quick_order_save');
+}
+
+async function saveQuickOrderTomorrow() {
+  const btn = document.getElementById('quick-order-save');
+  if (btn.disabled) return;
+  btn.disabled = true;
+  btn.textContent = t('saving');
+  try {
+    await updateOrders(getTomorrowDateStr(), quickOrderSnapshot.meat, quickOrderSnapshot.vegan, quickOrderMeat, quickOrderVegan);
+    notify(t('ok_order_saved'));
+    updateQuickOrderPanel();
+    updateQuickDayLists();
+  } catch (e) { /* safeFirebase already notified */ }
+  finally {
+    updateQuickOrderPanel();
+  }
+}
+
 function renderCalendar() {
   const y = currentMonth.getFullYear(), m = currentMonth.getMonth();
-  document.getElementById('current-month').textContent =
-    new Date(y,m).toLocaleDateString(t('ml'), { month:'long', year:'numeric' });
+  document.getElementById('current-month').textContent = formatAppDate(new Date(y, m, 1), 'monthYear');
   const firstDay = (new Date(y,m,1).getDay() + 6) % 7;
   const daysInMonth = new Date(y,m+1,0).getDate();
   const today = new Date(); today.setHours(0,0,0,0);
@@ -1213,9 +1916,8 @@ function renderCalendar() {
   for (let day=1; day<=daysInMonth; day++) {
     const date = new Date(y,m,day); date.setHours(0,0,0,0);
     const ds = toDateStr(date);
-    const dayOrds = allOrders.filter(o => o.employee_name===selectedEmployee && o.order_date===ds && o.order_status!=='accepted_marker');
-    const mc = dayOrds.filter(o=>o.food_category==='meat').length;
-    const vc = dayOrds.filter(o=>o.food_category==='vegan').length;
+    const mc = getMeatCount(selectedEmployee, ds);
+    const vc = getVeganCount(selectedEmployee, ds);
     const isPast = date < today;
     const isEditablePast = isPast && employeeManagerOverride;
     const isToday = date.getTime()===today.getTime();
@@ -1232,7 +1934,7 @@ function renderCalendar() {
       // Show lock icon on cells where deadline has passed but date is future/today
       if (!employeeManagerOverride && !deadlineCheck.allowed && (mc+vc===0)) {
         el.style.opacity = '0.45';
-        el.title = 'Приём заказов закрыт (после 18:00)';
+        el.title = t('deadline_cell_title');
       }
     }
     grid.appendChild(el);
@@ -1276,11 +1978,10 @@ function isOrderingAllowed(targetDateStr) {
 }
 
 function getDeadlineBannerHtml() {
-  const now = getTbilisiNow();
-  const h = now.getHours(), m = String(now.getMinutes()).padStart(2,'0');
+  const time = getTbilisiTimeStr();
   return `<div style="background:#fef3c7;border:2px solid #f59e0b;border-radius:8px;padding:12px 15px;margin-bottom:12px;">
-    <p style="font-size:14px;font-weight:700;color:#b45309;">🕕 Приём заказов закрыт</p>
-    <p style="font-size:12px;color:#78350f;margin-top:3px;">Заказы принимаются до 18:00 по Тбилиси (сейчас ${h}:${m}). Изменение невозможно.</p>
+    <p style="font-size:14px;font-weight:700;color:#b45309;">${t('deadline_closed_title')}</p>
+    <p style="font-size:12px;color:#78350f;margin-top:3px;">${t('deadline_closed_desc', { time })}</p>
   </div>`;
 }
 
@@ -1288,15 +1989,14 @@ function getDeadlineBannerHtml() {
 // ORDER MODAL
 // =============================================
 function openOrderModal(dateStr) {
-  const isAccepted = allOrders.some(o => o.order_date===dateStr && o.order_status==='accepted_marker');
   const deadline = isOrderingAllowed(dateStr);
+  const isAccepted = isDateAccepted(dateStr);
   const isLocked = employeeManagerOverride ? false : (isAccepted || !deadline.allowed);
-  const dayOrds = allOrders.filter(o => o.employee_name===selectedEmployee && o.order_date===dateStr && o.order_status!=='accepted_marker');
-  const oldMeat = dayOrds.filter(o=>o.food_category==='meat').length;
-  const oldVegan = dayOrds.filter(o=>o.food_category==='vegan').length;
+  const oldMeat = getMeatCount(selectedEmployee, dateStr);
+  const oldVegan = getVeganCount(selectedEmployee, dateStr);
   let mq=oldMeat, vq=oldVegan;
   const d = new Date(dateStr+'T00:00:00');
-  const dl = d.toLocaleDateString(t('dl'), {weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  const dl = formatAppDate(d, 'full');
   const ov = document.createElement('div');
   ov.className = 'modal-overlay';
   ov.innerHTML = `
@@ -1334,34 +2034,29 @@ function openOrderModal(dateStr) {
   ov.querySelector('#qcancel').addEventListener('click', ()=>ov.remove());
   const sb = ov.querySelector('#qsave');
   if (sb) sb.addEventListener('click', async ()=>{
-    sb.disabled = true; sb.textContent = '⏳';
-    await updateOrders(dateStr, oldMeat, oldVegan, mq, vq);
-    ov.remove();
+    sb.disabled = true; sb.textContent = t('saving');
+    try {
+      await updateOrders(dateStr, oldMeat, oldVegan, mq, vq);
+      ov.remove();
+      notify(t('ok_order_saved'));
+    } catch (e) { sb.disabled = false; sb.textContent = t('save'); }
   });
   ov.addEventListener('click', e=>{if(e.target===ov)ov.remove();});
 }
 
 async function updateOrders(ds, om, ov2, nm, nv) {
-  const ex = allOrders.filter(o=>o.employee_name===selectedEmployee&&o.order_date===ds&&o.order_status!=='accepted_marker');
-  const em = ex.filter(o=>o.food_category==='meat');
-  const ev = ex.filter(o=>o.food_category==='vegan');
-  const promises = [];
-  if (nm<om) { for(let i=0;i<om-nm;i++) if(em[i]) promises.push(deleteOrder(em[i].id)); }
-  else { for(let i=0;i<nm-om;i++) promises.push(createOrder({employee_name:selectedEmployee,order_date:ds,food_category:'meat',order_status:'pending',created_at:new Date().toISOString()})); }
-  if (nv<ov2) { for(let i=0;i<ov2-nv;i++) if(ev[i]) promises.push(deleteOrder(ev[i].id)); }
-  else { for(let i=0;i<nv-ov2;i++) promises.push(createOrder({employee_name:selectedEmployee,order_date:ds,food_category:'vegan',order_status:'pending',created_at:new Date().toISOString()})); }
-  await Promise.all(promises);
+  await setOrderCounts(selectedEmployee, ds, nm, nv);
 }
 
 function updateEmployeeOrders() {
   if (!selectedEmployee||selectedEmployee===JULIET_EMPLOYEE) return;
-  const emp = allOrders.filter(o=>o.employee_name===selectedEmployee&&o.order_status!=='accepted_marker');
-  const dates = [...new Set(emp.map(o=>o.order_date))].sort();
+  const emp = getEntriesForEmployee(selectedEmployee);
+  const dates = [...new Set(emp.map(e => e.order_date))].sort();
   const summaryEl = document.getElementById('employee-orders');
   const listEl = document.getElementById('employee-history-list');
-  const total = emp.length;
-  const meat = emp.filter(o=>o.food_category==='meat').length;
-  const vegan = emp.filter(o=>o.food_category==='vegan').length;
+  const total = emp.reduce((s, e) => s + e.meat + e.vegan, 0);
+  const meat = emp.reduce((s, e) => s + e.meat, 0);
+  const vegan = emp.reduce((s, e) => s + e.vegan, 0);
   document.getElementById('h-total').textContent = total;
   document.getElementById('h-meat').textContent = meat;
   document.getElementById('h-vegan').textContent = vegan;
@@ -1373,11 +2068,11 @@ function updateEmployeeOrders() {
   }
 
   const sortedDesc = [...dates].sort((a,b)=>b.localeCompare(a));
-  summaryEl.textContent = `${dates.length} дн. · ${t('h_total')}: ${total}`;
+  summaryEl.textContent = `${dates.length} ${t('history_days')} · ${t('h_total')}: ${total}`;
   listEl.innerHTML = sortedDesc.slice(0, 20).map(d => {
-    const mc=emp.filter(o=>o.order_date===d&&o.food_category==='meat').length;
-    const vc=emp.filter(o=>o.order_date===d&&o.food_category==='vegan').length;
-    const dt=new Date(d+'T00:00:00').toLocaleDateString(t('dl'), { weekday:'short', day:'2-digit', month:'2-digit', year:'numeric' });
+    const mc = getMeatCount(selectedEmployee, d);
+    const vc = getVeganCount(selectedEmployee, d);
+    const dt = formatAppDate(d, 'short');
     return `<div class="history-item">
       <span class="d">${dt}</span>
       <span class="b">${mc?`<span class="meat-color">🍖 ${mc}</span>`:''}${vc?`<span class="vegan-color">🥬 ${vc}</span>`:''}</span>
@@ -1386,15 +2081,20 @@ function updateEmployeeOrders() {
 }
 
 function getEmployeeDayOrderText(name, dateStr) {
-  const dayOrders = allOrders.filter(o => o.employee_name===name && o.order_date===dateStr && o.order_status!=='accepted_marker');
-  if (!dayOrders.length) return `<p>${t('no_orders')}</p>`;
-  const list = dayOrders.map((o, i) => `
-    <div class="quick-day-item">
-      <span class="idx">#${i + 1}</span>
-      <span>${o.food_category==='meat' ? '🍖' : '🥬'} ${o.food_category==='meat' ? t('filter_meat') : t('filter_vegan')}</span>
-    </div>
-  `).join('');
-  return `<div class="quick-day-list">${list}</div>`;
+  const meat = getMeatCount(name, dateStr);
+  const vegan = getVeganCount(name, dateStr);
+  if (meat + vegan === 0) return `<p>${t('no_orders')}</p>`;
+  let idx = 0;
+  const items = [];
+  for (let i = 0; i < meat; i++) {
+    idx++;
+    items.push(`<div class="quick-day-item"><span class="idx">#${idx}</span><span>🍖 ${t('filter_meat')}</span></div>`);
+  }
+  for (let i = 0; i < vegan; i++) {
+    idx++;
+    items.push(`<div class="quick-day-item"><span class="idx">#${idx}</span><span>🥬 ${t('filter_vegan')}</span></div>`);
+  }
+  return `<div class="quick-day-list">${items.join('')}</div>`;
 }
 
 function updateQuickDayLists() {
@@ -1423,12 +2123,12 @@ function showJulietMode() {
 
   function render() {
     const ds = toDateStr(jDate);
-    const dayOrds = allOrders.filter(o=>o.order_date===ds&&o.order_status!=='accepted_marker');
-    const mc=dayOrds.filter(o=>o.food_category==='meat').length;
-    const vc=dayOrds.filter(o=>o.food_category==='vegan').length;
-    const total=mc+vc;
-    const isAcc=allOrders.some(o=>o.order_date===ds&&o.order_status==='accepted_marker');
-    const dl=jDate.toLocaleDateString(t('dl'),{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    const dayEntries = getEntriesForDate(ds);
+    const mc = dayEntries.reduce((s, e) => s + e.meat, 0);
+    const vc = dayEntries.reduce((s, e) => s + e.vegan, 0);
+    const total = mc + vc;
+    const isAcc = isDateAccepted(ds);
+    const dl = formatAppDate(jDate, 'full');
     ov.innerHTML = `
       <div class="modal" style="max-width:480px;width:100%;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
@@ -1444,30 +2144,32 @@ function showJulietMode() {
         <div class="day-totals">
           <div class="day-total-card"><div class="dtc-label">${t('meat')}</div><div class="dtc-val meat-color">${mc}</div></div>
           <div class="day-total-card"><div class="dtc-label">${t('vegan')}</div><div class="dtc-val vegan-color">${vc}</div></div>
-          <div class="day-total-card"><div class="dtc-label">Итого</div><div class="dtc-val total-color">${total}</div></div>
+          <div class="day-total-card"><div class="dtc-label">${t('total_label')}</div><div class="dtc-val total-color">${total}</div></div>
         </div>
         ${isAcc?`<div class="accepted-banner"><p class="ab-title">${t('accepted_title')}</p><p class="ab-desc">${t('accepted_desc')}</p></div>`:''}
         <button class="btn btn-success btn-full" id="jaccept" ${isAcc?'disabled':''}>${isAcc?'✓ '+t('accepted_title'):t('accept_btn')}</button>
       </div>`;
-    ov.querySelector('#jclose').addEventListener('click', ()=>{ ov.remove(); document.getElementById('employee-select').value=''; selectedEmployee=null; });
+    ov.querySelector('#jclose').addEventListener('click', ()=>{ window._julietRender=null; ov.remove(); document.getElementById('employee-select').value=''; selectedEmployee=null; });
     ov.querySelector('#jprev').addEventListener('click', ()=>{ jDate=new Date(jDate); jDate.setDate(jDate.getDate()-1); render(); });
     ov.querySelector('#jnext').addEventListener('click', ()=>{ jDate=new Date(jDate); jDate.setDate(jDate.getDate()+1); render(); });
     ov.querySelector('#jtoday').addEventListener('click', ()=>{ jDate=new Date(); jDate.setHours(0,0,0,0); render(); });
     ov.querySelector('#jaccept').addEventListener('click', async ()=>{
-      await createOrder({employee_name:'SYSTEM',order_date:ds,food_category:'accepted_marker',order_status:'accepted_marker',created_at:new Date().toISOString()});
-      notify(t('ok_accepted'));
+      try {
+        await acceptDate(ds);
+        notify(t('ok_accepted'));
+      } catch (e) { /* safeFirebase notified */ }
     });
   }
+  window._julietRender = render;
   render();
   document.body.appendChild(ov);
-  ov.addEventListener('click', e=>{ if(e.target===ov){ ov.remove(); document.getElementById('employee-select').value=''; selectedEmployee=null; } });
+  ov.addEventListener('click', e=>{ if(e.target===ov){ window._julietRender=null; ov.remove(); document.getElementById('employee-select').value=''; selectedEmployee=null; } });
 }
 
 // =============================================
 // PASSWORD MODALS
 // =============================================
-function showPasswordModal(title, desc, onSuccess, requiredPwd) {
-  requiredPwd = requiredPwd || MANAGER_PASSWORD;
+function showPasswordModal(title, desc, onSuccess, accessRole) {
   const ov = document.createElement('div');
   ov.className = 'modal-overlay';
   ov.innerHTML = `
@@ -1484,9 +2186,20 @@ function showPasswordModal(title, desc, onSuccess, requiredPwd) {
     </div>`;
   document.body.appendChild(ov);
   const p = ov.querySelector('#pm-pwd');
-  const tryLogin = ()=>{ if(p.value===requiredPwd){ ov.remove(); onSuccess(); } else { notify(t('err_wrong_pwd')); p.value=''; p.focus(); } };
+  const btn = ov.querySelector('#pm-enter');
+  const tryLogin = async () => {
+    btn.disabled = true;
+    const ok = accessRole ? await verifyAccessPassword(accessRole, p.value) : false;
+    btn.disabled = false;
+    if (ok) {
+      if (accessRole) await saveAccessAuthFromPwd(accessRole, p.value);
+      ov.remove();
+      onSuccess();
+    }
+    else { notify(t('err_wrong_pwd')); p.value = ''; p.focus(); }
+  };
   ov.querySelector('#pm-cancel').addEventListener('click', ()=>ov.remove());
-  ov.querySelector('#pm-enter').addEventListener('click', tryLogin);
+  btn.addEventListener('click', tryLogin);
   p.addEventListener('keypress', e=>{ if(e.key==='Enter') tryLogin(); });
   ov.addEventListener('click', e=>{ if(e.target===ov) ov.remove(); });
   setTimeout(()=>p.focus(), 100);
@@ -1507,12 +2220,18 @@ function showCreatePwdModal(emp, onSuccess) {
     </div>`;
   document.body.appendChild(ov);
   const p1=ov.querySelector('#cp1'), p2=ov.querySelector('#cp2');
-  ov.querySelector('#cpc').addEventListener('click', ()=>{ ov.remove(); document.getElementById('employee-select').value=''; selectedEmployee=null; });
-  ov.querySelector('#cps').addEventListener('click', ()=>{
+  ov.querySelector('#cpc').addEventListener('click', ()=>{ ov.remove(); document.getElementById('employee-select').value=''; selectedEmployee=null; saveSelectedEmployee(''); });
+  ov.querySelector('#cps').addEventListener('click', async ()=>{
     if(!p1.value){notify(t('err_pwd_empty'));return;}
     if(p1.value!==p2.value){notify(t('err_pwd_match'));p1.value='';p2.value='';return;}
     if(p1.value.length<4){notify(t('err_pwd_short'));return;}
-    employeePasswords[emp]=p1.value; savePasswords().then(()=>{ ov.remove(); notify(t('ok_pwd_saved')); onSuccess(); });
+    try {
+      const hash = await hashPassword(p1.value);
+      employeePasswords[emp] = hash;
+      await savePasswords();
+      await saveEmployeeAuthFromPwd(emp, p1.value);
+      ov.remove(); notify(t('ok_pwd_saved')); onSuccess();
+    } catch (e) { /* safeFirebase notified */ }
   });
   setTimeout(()=>p1.focus(), 100);
 }
@@ -1534,8 +2253,15 @@ function showEnterPwdModal(emp, onSuccess) {
     </div>`;
   document.body.appendChild(ov);
   const p=ov.querySelector('#ep1');
-  const tryL=()=>{ if(p.value===employeePasswords[emp]){ ov.remove(); onSuccess(); } else { notify(t('err_wrong_pwd')); p.value=''; p.focus(); } };
-  ov.querySelector('#epc').addEventListener('click', ()=>{ ov.remove(); document.getElementById('employee-select').value=''; selectedEmployee=null; });
+  const tryL=async ()=>{
+    if(await verifyEmployeePassword(emp, p.value)){
+      await saveEmployeeAuthFromPwd(emp, p.value);
+      ov.remove();
+      onSuccess();
+    }
+    else { notify(t('err_wrong_pwd')); p.value=''; p.focus(); }
+  };
+  ov.querySelector('#epc').addEventListener('click', ()=>{ ov.remove(); document.getElementById('employee-select').value=''; selectedEmployee=null; saveSelectedEmployee(''); });
   ov.querySelector('#epe').addEventListener('click', tryL);
   ov.querySelector('#epm').addEventListener('click', ()=>{
     showPasswordModal(t('manager_login'), t('manager_login_desc'), ()=>{
@@ -1543,7 +2269,7 @@ function showEnterPwdModal(emp, onSuccess) {
       ov.remove();
       onSuccess();
       notify(t('manager_edit_mode'));
-    }, MANAGER_PASSWORD);
+    }, 'manager');
   });
   p.addEventListener('keypress', e=>{ if(e.key==='Enter') tryL(); });
   ov.addEventListener('click', e=>{ if(e.target===ov){ ov.remove(); document.getElementById('employee-select').value=''; selectedEmployee=null; } });
@@ -1562,25 +2288,7 @@ function getFilteredDetailed() {
   const fTo = document.getElementById('filter-to')?.value || '';
   const fScope = document.getElementById('filter-scope')?.value || 'all';
   const today = toDateStr(new Date());
-  const grouped = {};
-  allOrders.forEach(o => {
-    if (o.order_status==='accepted_marker') return;
-    const key = o.employee_name+'|'+o.order_date;
-    if (!grouped[key]) grouped[key]={name:o.employee_name,date:o.order_date,orders:[]};
-    grouped[key].orders.push(o);
-  });
-  const rows = [];
-  Object.values(grouped).forEach(g => {
-    g.orders.forEach((o, idx) => {
-      const isFirst = idx === 0;
-      rows.push({
-        name: g.name, date: g.date, category: o.food_category,
-        position: idx+1,
-        companyPays: isFirst ? 5 : 0,
-        employeePays: isFirst ? 5 : 10
-      });
-    });
-  });
+  const rows = getAllDetailedRows();
   return rows.filter(r =>
     (!fDate || r.date===fDate) &&
     (!fFrom || r.date>=fFrom) &&
@@ -1603,8 +2311,8 @@ function updateManagerReport() {
   }
   tbody.innerHTML = rows.map(r=>`
     <tr>
-      <td>${(lang==='ka'&&EMPLOYEE_NAMES_KA[r.name])?EMPLOYEE_NAMES_KA[r.name]:r.name}</td>
-      <td>${new Date(r.date+'T00:00:00').toLocaleDateString(t('dl'))}</td>
+      <td>${empDisplayName(r.name)}</td>
+      <td>${formatAppDate(r.date, 'date')}</td>
       <td>${r.category==='meat'?t('filter_meat'):t('filter_vegan')}</td>
       <td>${r.position}</td>
       <td>10 ₾</td>
@@ -1683,46 +2391,34 @@ function setQuickRange(type) {
 }
 
 function getGroupedOrdersForEditor() {
-  const filtered = getFilteredDetailed();
-  const grouped = {};
-  filtered.forEach(r => {
-    const key = `${r.name}|${r.date}`;
-    if (!grouped[key]) grouped[key] = { name: r.name, date: r.date, meat: 0, vegan: 0 };
-    if (r.category === 'meat') grouped[key].meat += 1;
-    if (r.category === 'vegan') grouped[key].vegan += 1;
-  });
-  return Object.values(grouped).sort((a,b)=>b.date.localeCompare(a.date)||a.name.localeCompare(b.name));
+  const fDate = document.getElementById('filter-date').value;
+  const fEmp = document.getElementById('filter-employee').value;
+  const fSearch = (document.getElementById('filter-search')?.value || '').trim().toLowerCase();
+  const fFrom = document.getElementById('filter-from')?.value || '';
+  const fTo = document.getElementById('filter-to')?.value || '';
+  const fScope = document.getElementById('filter-scope')?.value || 'all';
+  const today = toDateStr(new Date());
+  return orderEntries
+    .filter(e => e.meat > 0 || e.vegan > 0)
+    .filter(e =>
+      (!fDate || e.order_date === fDate) &&
+      (!fFrom || e.order_date >= fFrom) &&
+      (!fTo || e.order_date <= fTo) &&
+      (!fEmp || e.employee_name === fEmp) &&
+      (!fSearch || (e.employee_name.toLowerCase().includes(fSearch) || e.order_date.includes(fSearch))) &&
+      (fScope === 'all' || (fScope === 'active' ? e.order_date >= today : e.order_date < today))
+    )
+    .map(e => ({ name: e.employee_name, date: e.order_date, meat: e.meat, vegan: e.vegan }))
+    .sort((a, b) => b.date.localeCompare(a.date) || a.name.localeCompare(b.name));
 }
 
 async function saveManagerOrderEdit(oldName, oldDate, newName, newDate, meatCount, veganCount) {
-  const srcOrders = allOrders.filter(o => o.order_status!=='accepted_marker' && o.employee_name===oldName && o.order_date===oldDate);
-  const byCat = cat => srcOrders.filter(o => o.food_category===cat);
-  const promises = [];
-
-  function reconcile(cat, targetCount) {
-    const existing = byCat(cat);
-    for (let i = 0; i < targetCount; i++) {
-      if (existing[i]) {
-        const next = { ...existing[i], employee_name: newName, order_date: newDate };
-        promises.push(window._setDoc(window._doc(window._db, 'orders', existing[i].id), next));
-      } else {
-        promises.push(createOrder({
-          employee_name: newName,
-          order_date: newDate,
-          food_category: cat,
-          order_status: 'pending',
-          created_at: new Date().toISOString()
-        }));
-      }
-    }
-    for (let i = targetCount; i < existing.length; i++) {
-      promises.push(deleteOrder(existing[i].id));
-    }
+  if (oldName === newName && oldDate === newDate) {
+    await setOrderCounts(newName, newDate, meatCount, veganCount);
+  } else {
+    await setOrderCounts(oldName, oldDate, 0, 0);
+    await setOrderCounts(newName, newDate, meatCount, veganCount);
   }
-
-  reconcile('meat', meatCount);
-  reconcile('vegan', veganCount);
-  await Promise.all(promises);
 }
 
 function showManagerOrdersEditor() {
@@ -1751,8 +2447,8 @@ function showManagerOrdersEditor() {
       return;
     }
     list.innerHTML = groups.map(g => {
-      const dispName = (lang==='ka' && EMPLOYEE_NAMES_KA[g.name]) ? EMPLOYEE_NAMES_KA[g.name] : g.name;
-      const dispDate = new Date(g.date+'T00:00:00').toLocaleDateString(t('dl'));
+      const dispName = empDisplayName(g.name);
+      const dispDate = formatAppDate(g.date, 'date');
       return `<div class="manager-editor-item">
         <div>
           <p>${dispName}</p>
@@ -1776,9 +2472,8 @@ function showManagerOrdersEditor() {
 }
 
 function showManagerSingleOrderEdit(parentOv, employeeName, dateStr) {
-  const dayOrders = allOrders.filter(o => o.order_status!=='accepted_marker' && o.employee_name===employeeName && o.order_date===dateStr);
-  const startMeat = dayOrders.filter(o=>o.food_category==='meat').length;
-  const startVegan = dayOrders.filter(o=>o.food_category==='vegan').length;
+  const startMeat = getMeatCount(employeeName, dateStr);
+  const startVegan = getVeganCount(employeeName, dateStr);
   let meat = startMeat, vegan = startVegan;
 
   const ov = document.createElement('div');
@@ -1818,7 +2513,7 @@ function showManagerSingleOrderEdit(parentOv, employeeName, dateStr) {
   [...employees].sort().forEach(emp => {
     const option = document.createElement('option');
     option.value = emp;
-    option.textContent = (lang==='ka' && EMPLOYEE_NAMES_KA[emp]) ? EMPLOYEE_NAMES_KA[emp] : emp;
+    option.textContent = empDisplayName(emp);
     if (emp === employeeName) option.selected = true;
     empSel.appendChild(option);
   });
@@ -1846,7 +2541,7 @@ function showManagerSingleOrderEdit(parentOv, employeeName, dateStr) {
     if (!newEmp || !newDate) return;
     const sb = ov.querySelector('#mgr-save');
     sb.disabled = true;
-    sb.textContent = '⏳';
+    sb.textContent = t('saving');
     await saveManagerOrderEdit(employeeName, dateStr, newEmp, newDate, meat, vegan);
     ov.remove();
     parentOv.remove();
@@ -1860,10 +2555,10 @@ function populateEmployeeFilter() {
   const sel = document.getElementById('filter-employee');
   const cur = sel.value;
   while(sel.options.length>1) sel.remove(1);
-  [...new Set(allOrders.filter(o=>o.order_status!=='accepted_marker').map(o=>o.employee_name))].sort().forEach(emp=>{
+  [...new Set(orderEntries.filter(e => e.meat > 0 || e.vegan > 0).map(e => e.employee_name))].sort().forEach(emp=>{
     const o=document.createElement('option');
     o.value=emp;
-    o.textContent=(lang==='ka'&&EMPLOYEE_NAMES_KA[emp])?EMPLOYEE_NAMES_KA[emp]:emp;
+    o.textContent=empDisplayName(emp);
     sel.appendChild(o);
   });
   sel.value=cur;
@@ -1872,14 +2567,14 @@ function populateEmployeeFilter() {
 function copyReport() {
   const rows=getFilteredDetailed();
   const header=[t('th_name'),t('th_date'),t('th_cat'),t('th_pos'),t('th_price'),t('th_company'),t('th_employee')].join('\t');
-  const body=rows.map(r=>[r.name,new Date(r.date+'T00:00:00').toLocaleDateString(t('dl')),r.category==='meat'?'Мясо':'Веган',r.position,'10 ₾',r.companyPays+' ₾',r.employeePays+' ₾'].join('\t')).join('\n');
+  const body=rows.map(r=>[r.name,formatAppDate(r.date,'date'),r.category==='meat'?t('csv_meat'):t('csv_vegan'),r.position,'10 ₾',r.companyPays+' ₾',r.employeePays+' ₾'].join('\t')).join('\n');
   navigator.clipboard.writeText(header+'\n'+body).then(()=>notify(t('ok_copy'))).catch(()=>{});
 }
 
 function exportCSV() {
   const rows=getFilteredDetailed();
   const hdr=[t('th_name'),t('th_date'),t('th_cat'),t('th_pos'),t('th_price'),t('th_company'),t('th_employee')].map(h=>`"${h}"`).join(',');
-  const body=rows.map(r=>[r.name,new Date(r.date+'T00:00:00').toLocaleDateString(t('dl')),r.category==='meat'?'Мясо':'Веган',r.position,'10 ₾',r.companyPays+' ₾',r.employeePays+' ₾'].map(v=>`"${v}"`).join(','));
+  const body=rows.map(r=>[r.name,formatAppDate(r.date,'date'),r.category==='meat'?t('csv_meat'):t('csv_vegan'),r.position,'10 ₾',r.companyPays+' ₾',r.employeePays+' ₾'].map(v=>`"${v}"`).join(','));
   const csv='\uFEFF'+hdr+'\n'+body.join('\n');
   const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));
   a.download=`orders_${new Date().toISOString().slice(0,10)}.csv`; a.click();
@@ -1901,7 +2596,7 @@ function showSalaryReport() {
       <div class="overflow-x" style="margin-bottom:14px;">
         <table class="report-table">
           <thead><tr><th>${t('salary_emp')}</th><th>${t('salary_amount')}</th></tr></thead>
-          <tbody>${sorted.map(([n,v])=>`<tr><td>${(lang==='ka'&&EMPLOYEE_NAMES_KA[n])?EMPLOYEE_NAMES_KA[n]:n}</td><td class="pay-employee">${v} ₾</td></tr>`).join('')}</tbody>
+          <tbody>${sorted.map(([n,v])=>`<tr><td>${empDisplayName(n)}</td><td class="pay-employee">${v} ₾</td></tr>`).join('')}</tbody>
         </table>
       </div>
       <div class="stat-card red" style="margin-bottom:14px;">
@@ -1925,23 +2620,92 @@ function showSalaryReport() {
   ov.addEventListener('click',e=>{ if(e.target===ov) ov.remove(); });
 }
 
+function getTbilisiMonthStr() {
+  const now = getTbilisiNow();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+}
+
+function getTbilisiMonthStart(fromDate) {
+  const d = fromDate || getTbilisiNow();
+  return new Date(d.getFullYear(), d.getMonth(), 1);
+}
+
+function resetEmployeeSummaryMonth() {
+  employeeSummaryMonth = getTbilisiMonthStart();
+}
+
+function getEmployeeSummaryMonthStr() {
+  if (!employeeSummaryMonth) resetEmployeeSummaryMonth();
+  return `${employeeSummaryMonth.getFullYear()}-${String(employeeSummaryMonth.getMonth() + 1).padStart(2, '0')}`;
+}
+
+function isCurrentTbilisiMonth(monthDate) {
+  const now = getTbilisiNow();
+  return monthDate.getFullYear() === now.getFullYear() && monthDate.getMonth() === now.getMonth();
+}
+
+function shiftEmployeeSummaryMonth(delta) {
+  if (!employeeSummaryMonth) resetEmployeeSummaryMonth();
+  const next = new Date(employeeSummaryMonth.getFullYear(), employeeSummaryMonth.getMonth() + delta, 1);
+  const nowStart = getTbilisiMonthStart();
+  if (next > nowStart) return;
+  employeeSummaryMonth = next;
+  updateEmployeeMonthSummary();
+}
+
+function getEmployeeMonthStats(employeeName, monthStr) {
+  const monthPrefix = monthStr + '-';
+  const entries = orderEntries.filter(e =>
+    e.employee_name === employeeName &&
+    e.order_date.startsWith(monthPrefix) &&
+    (e.meat + e.vegan > 0)
+  );
+  let lunches = 0, deduction = 0;
+  entries.forEach(e => {
+    const count = e.meat + e.vegan;
+    lunches += count;
+    deduction += 5 + Math.max(0, count - 1) * 10;
+  });
+  return { lunches, totalCost: lunches * 10, deduction };
+}
+
+function updateEmployeeMonthSummary() {
+  const panel = document.getElementById('employee-month-summary');
+  if (!panel || panel.classList.contains('hidden') || !selectedEmployee) return;
+  if (!employeeSummaryMonth) resetEmployeeSummaryMonth();
+  const monthStr = getEmployeeSummaryMonthStr();
+  const stats = getEmployeeMonthStats(selectedEmployee, monthStr);
+  const monthLabel = formatAppDate(monthStr + '-01', 'monthYear');
+  const labelEl = document.getElementById('ems-month-label');
+  if (labelEl) labelEl.textContent = monthLabel;
+  const ordersEl = document.getElementById('ems-orders');
+  const deductEl = document.getElementById('ems-deduct');
+  if (ordersEl) ordersEl.textContent = stats.lunches;
+  if (deductEl) deductEl.textContent = stats.deduction + ' ₾';
+  const prevBtn = document.getElementById('ems-prev-month');
+  const nextBtn = document.getElementById('ems-next-month');
+  const thisBtn = document.getElementById('ems-this-month');
+  const onCurrent = isCurrentTbilisiMonth(employeeSummaryMonth);
+  if (prevBtn) prevBtn.setAttribute('aria-label', t('emp_month_prev'));
+  if (nextBtn) {
+    nextBtn.setAttribute('aria-label', t('emp_month_next'));
+    nextBtn.disabled = onCurrent;
+  }
+  if (thisBtn) thisBtn.disabled = onCurrent;
+}
+
 function getMonthlySalaryRows(monthStr) {
   const monthPrefix = monthStr + '-';
-  const monthOrders = allOrders.filter(o => o.order_status !== 'accepted_marker' && o.order_date.startsWith(monthPrefix));
-  const byEmployeeDate = {};
-  monthOrders.forEach(o => {
-    const key = `${o.employee_name}|${o.order_date}`;
-    byEmployeeDate[key] = (byEmployeeDate[key] || 0) + 1;
-  });
+  const monthEntries = orderEntries.filter(e => e.order_date.startsWith(monthPrefix) && (e.meat + e.vegan > 0));
   const byEmployee = {};
-  Object.entries(byEmployeeDate).forEach(([k, count]) => {
-    const name = k.split('|')[0];
-    if (!byEmployee[name]) byEmployee[name] = { lunches: 0, amount: 0 };
-    byEmployee[name].lunches += count;
-    byEmployee[name].amount += 5 + Math.max(0, count - 1) * 10;
+  monthEntries.forEach(e => {
+    const count = e.meat + e.vegan;
+    if (!byEmployee[e.employee_name]) byEmployee[e.employee_name] = { lunches: 0, amount: 0 };
+    byEmployee[e.employee_name].lunches += count;
+    byEmployee[e.employee_name].amount += 5 + Math.max(0, count - 1) * 10;
   });
   return Object.entries(byEmployee)
-    .map(([name, v]) => ({ name, ka: EMPLOYEE_NAMES_KA[name] || '-', lunches: v.lunches, amount: v.amount }))
+    .map(([name, v]) => ({ name, ka: employeeNamesKa[name] || '-', lunches: v.lunches, amount: v.amount }))
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
@@ -1951,7 +2715,7 @@ function showMonthlyPrintReport() {
   const rows = getMonthlySalaryRows(picked);
   const totalLunches = rows.reduce((s, r) => s + r.lunches, 0);
   const totalAmount = rows.reduce((s, r) => s + r.amount, 0);
-  const monthLabel = new Date(picked + '-01T00:00:00').toLocaleDateString(t('dl'), { month: 'long', year: 'numeric' });
+  const monthLabel = formatAppDate(picked + '-01', 'monthYear');
 
   const ov = document.createElement('div');
   ov.className = 'modal-overlay';
@@ -2024,22 +2788,22 @@ function cookToday() { cookCurrentDate=new Date(); cookCurrentDate.setHours(0,0,
 
 function updateCookDisplay() {
   const ds=toDateStr(cookCurrentDate);
-  const dayOrds=allOrders.filter(o=>o.order_date===ds&&o.order_status!=='accepted_marker');
-  const mc=dayOrds.filter(o=>o.food_category==='meat').length;
-  const vc=dayOrds.filter(o=>o.food_category==='vegan').length;
-  document.getElementById('cook-date').textContent=cookCurrentDate.toLocaleDateString(t('dl'),{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  const dayEntries = getEntriesForDate(ds);
+  const mc = dayEntries.reduce((s, e) => s + e.meat, 0);
+  const vc = dayEntries.reduce((s, e) => s + e.vegan, 0);
+  document.getElementById('cook-date').textContent = formatAppDate(cookCurrentDate, 'full');
   document.getElementById('cook-meat-count').textContent=mc;
   document.getElementById('cook-vegan-count').textContent=vc;
   const grouped={};
-  dayOrds.forEach(o=>{
-    if(!grouped[o.employee_name])grouped[o.employee_name]={meat:0,vegan:0};
-    if(o.food_category==='meat')grouped[o.employee_name].meat++;
-    else grouped[o.employee_name].vegan++;
+  dayEntries.forEach(e=>{
+    if(!grouped[e.employee_name])grouped[e.employee_name]={meat:0,vegan:0};
+    grouped[e.employee_name].meat += e.meat;
+    grouped[e.employee_name].vegan += e.vegan;
   });
   const monthPrefix = `${cookCurrentDate.getFullYear()}-${String(cookCurrentDate.getMonth() + 1).padStart(2,'0')}-`;
-  const monthOrders = allOrders.filter(o => o.order_status!=='accepted_marker' && o.order_date.startsWith(monthPrefix));
-  const dayCount = dayOrds.length;
-  const monthCount = monthOrders.length;
+  const monthEntries = orderEntries.filter(e => e.order_date.startsWith(monthPrefix) && (e.meat + e.vegan > 0));
+  const dayCount = dayEntries.reduce((s, e) => s + e.meat + e.vegan, 0);
+  const monthCount = monthEntries.reduce((s, e) => s + e.meat + e.vegan, 0);
   document.getElementById('cook-day-orders').textContent = dayCount;
   document.getElementById('cook-day-money').textContent = (dayCount * 10) + ' ₾';
   document.getElementById('cook-month-orders').textContent = monthCount;
@@ -2052,7 +2816,7 @@ function updateCookDisplay() {
     let b='';
     if(c.meat)b+=`<span style="background:var(--red-light);color:var(--red);padding:2px 8px;border-radius:5px;font-size:12px;font-weight:700;">🍖 ${c.meat}</span>`;
     if(c.vegan)b+=`<span style="background:var(--green-light);color:var(--green);padding:2px 8px;border-radius:5px;font-size:12px;font-weight:700;${c.meat?'margin-left:4px':''}">🥬 ${c.vegan}</span>`;
-    const dispN=(lang==='ka'&&EMPLOYEE_NAMES_KA[n])?EMPLOYEE_NAMES_KA[n]:n;
+    const dispN=empDisplayName(n);
     return `<div class="cook-detail-item"><span style="font-weight:700;">${dispN}</span><span>${b}</span></div>`;
   }).join('');
 }
@@ -2083,21 +2847,25 @@ function showEmployeesModal() {
   ov.querySelector('#emcl').addEventListener('click',()=>ov.remove());
   ov.querySelector('#emcl2').addEventListener('click',()=>ov.remove());
   ov.addEventListener('click',e=>{ if(e.target===ov)ov.remove(); });
-  ov.querySelector('#emadd').addEventListener('click',()=>{
+  ov.querySelector('#emadd').addEventListener('click', async ()=>{
     const ru=ov.querySelector('#neru').value.trim(), ka=ov.querySelector('#neka').value.trim();
     const name=ru||ka;
     if(!name){notify(t('err_emp_name'));return;}
     if(employees.includes(name)){notify(t('err_emp_exists'));return;}
-    employees.push(name); employees.sort(); saveEmployees().then(()=>{});
-    populateEmployeeSelect(); populateEmployeeFilter();
-    ov.querySelector('#neru').value=''; ov.querySelector('#neka').value='';
-    renderEmpList(ov); notify(t('ok_emp_added'));
+    employees.push(name); employees.sort();
+    if (ru && ka) employeeNamesKa[ru] = ka;
+    try {
+      await saveEmployees();
+      populateEmployeeSelect(); populateEmployeeFilter();
+      ov.querySelector('#neru').value=''; ov.querySelector('#neka').value='';
+      renderEmpList(ov); notify(t('ok_emp_added'));
+    } catch (e) { employees.splice(employees.indexOf(name), 1); if (ru && ka) delete employeeNamesKa[ru]; }
   });
 }
 
 function hasRecentOrders(name) {
   const cutoff=new Date(); cutoff.setMonth(cutoff.getMonth()-2); cutoff.setHours(0,0,0,0);
-  return allOrders.some(o=>o.employee_name===name&&o.order_status!=='accepted_marker'&&new Date(o.order_date+'T00:00:00')>=cutoff);
+  return orderEntries.some(e=>e.employee_name===name&&(e.meat+e.vegan)>0&&new Date(e.order_date+'T00:00:00')>=cutoff);
 }
 
 function renderEmpList(ov) {
@@ -2106,7 +2874,7 @@ function renderEmpList(ov) {
     const hp=!!employeePasswords[emp], hr=hasRecentOrders(emp);
     return `<div class="emp-item">
       <div class="emp-info">
-        <p>${(lang==='ka'&&EMPLOYEE_NAMES_KA[emp])?EMPLOYEE_NAMES_KA[emp]:emp}</p>
+        <p>${empDisplayName(emp)}</p>
         <p>${hp?t('pwd_set'):t('pwd_not_set')}${hr?' · <span style="color:#d97706;font-size:11px;">'+t('recent_warn')+'</span>':''}</p>
       </div>
       <div class="emp-actions">
@@ -2120,13 +2888,21 @@ function renderEmpList(ov) {
     btn.addEventListener('click',()=>{
       const emp=btn.dataset.e, act=btn.dataset.a;
       if(act==='edit') showEditEmpModal(emp,ov);
-      else if(act==='reset') { delete employeePasswords[emp]; savePasswords().then(()=>{ renderEmpList(ov); notify(t('ok_pwd_reset')); }); }
+      else if(act==='reset') {
+        delete employeePasswords[emp];
+        clearEmployeeAuth(emp);
+        savePasswords().then(()=>{ renderEmpList(ov); notify(t('ok_pwd_reset')); }).catch(()=>{});
+      }
       else if(act==='del') {
         if(hasRecentOrders(emp)){notify(t('err_cant_delete'));return;}
-        employees.splice(employees.indexOf(emp),1); saveEmployees();
-        delete employeePasswords[emp]; savePasswords().then(()=>{});
-        populateEmployeeSelect(); populateEmployeeFilter();
-        renderEmpList(ov); notify(t('ok_emp_deleted'));
+        employees.splice(employees.indexOf(emp),1);
+        delete employeeNamesKa[emp];
+        delete employeePasswords[emp];
+        clearEmployeeAuth(emp);
+        Promise.all([saveEmployees(), savePasswords()]).then(()=>{
+          populateEmployeeSelect(); populateEmployeeFilter();
+          renderEmpList(ov); notify(t('ok_emp_deleted'));
+        }).catch(()=>{});
       }
     });
   });
@@ -2143,7 +2919,7 @@ function showEditEmpModal(old, parent) {
       </div>
       <div class="input-group">
         <label class="field-label">${t('edit_emp_ka')}</label>
-        <input type="text" id="eeka" placeholder="შეიყვანეთ სახელი">
+        <input type="text" id="eeka" value="${employeeNamesKa[old] || ''}" placeholder="${t('add_emp_ph2')}">
       </div>
       <div class="modal-footer">
         <button class="btn btn-ghost" id="eecc">${t('cancel')}</button>
@@ -2153,18 +2929,26 @@ function showEditEmpModal(old, parent) {
   document.body.appendChild(ov);
   const ri=ov.querySelector('#eeru');
   ov.querySelector('#eecc').addEventListener('click',()=>ov.remove());
-  ov.querySelector('#eess').addEventListener('click',()=>{
+  ov.querySelector('#eess').addEventListener('click', async ()=>{
     const nn=ri.value.trim()||ov.querySelector('#eeka').value.trim();
+    const kaVal=ov.querySelector('#eeka').value.trim();
     if(!nn){notify(t('err_emp_name'));return;}
     if(nn!==old&&employees.includes(nn)){notify(t('err_emp_exists'));return;}
     const idx=employees.indexOf(old);
     if(idx>-1){
-      employees[idx]=nn; employees.sort(); saveEmployees();
-      if(employeePasswords[old]){employeePasswords[nn]=employeePasswords[old];delete employeePasswords[old];savePasswords().then(()=>{});}
-      // allOrders rename handled in Firestore via batch update
-      allOrders.filter(o=>o.employee_name===old).forEach(async o=>{ o.employee_name=nn; await window._setDoc(window._doc(window._db,'orders',o.id),o); });
-      populateEmployeeSelect(); populateEmployeeFilter(); updateManagerReport();
-      renderEmpList(parent); ov.remove(); notify(t('ok_emp_renamed'));
+      employees[idx]=nn; employees.sort();
+      if (employeeNamesKa[old]) { employeeNamesKa[nn] = employeeNamesKa[old]; delete employeeNamesKa[old]; }
+      if (kaVal) employeeNamesKa[nn] = kaVal;
+      else if (nn === old) delete employeeNamesKa[nn];
+      try {
+        await saveEmployees();
+        if(employeePasswords[old]){employeePasswords[nn]=employeePasswords[old];delete employeePasswords[old];await savePasswords();}
+        migrateEmployeeAuth(old, nn);
+        if (localStorage.getItem(LS_EMPLOYEE_KEY) === old) saveSelectedEmployee(nn);
+        await renameEmployeeOrders(old, nn);
+        populateEmployeeSelect(); populateEmployeeFilter(); updateManagerReport();
+        renderEmpList(parent); ov.remove(); notify(t('ok_emp_renamed'));
+      } catch (e) { /* notified */ }
     }
   });
   setTimeout(()=>ri.focus(), 100);
@@ -2188,23 +2972,51 @@ document.getElementById('btn-employee').addEventListener('click',()=>switchMode(
 document.getElementById('btn-manager').addEventListener('click',()=>switchMode('manager'));
 document.getElementById('btn-cook').addEventListener('click',()=>switchMode('cook'));
 
+document.getElementById('qo-meat-minus').addEventListener('click', () => { if (quickOrderMeat > 0) { quickOrderMeat--; document.getElementById('qo-meat').value = quickOrderMeat; } });
+document.getElementById('qo-meat-plus').addEventListener('click', () => { if (quickOrderMeat < 10) { quickOrderMeat++; document.getElementById('qo-meat').value = quickOrderMeat; } });
+document.getElementById('qo-vegan-minus').addEventListener('click', () => { if (quickOrderVegan > 0) { quickOrderVegan--; document.getElementById('qo-vegan').value = quickOrderVegan; } });
+document.getElementById('qo-vegan-plus').addEventListener('click', () => { if (quickOrderVegan < 10) { quickOrderVegan++; document.getElementById('qo-vegan').value = quickOrderVegan; } });
+document.getElementById('quick-order-save').addEventListener('click', saveQuickOrderTomorrow);
+document.getElementById('ems-prev-month').addEventListener('click', () => shiftEmployeeSummaryMonth(-1));
+document.getElementById('ems-next-month').addEventListener('click', () => shiftEmployeeSummaryMonth(1));
+document.getElementById('ems-this-month').addEventListener('click', () => { resetEmployeeSummaryMonth(); updateEmployeeMonthSummary(); });
+
 // Wait for Firebase to load data, then init
 window.addEventListener('firebase-ready', () => {
-  // Populate from Firebase data
-  allOrders.push(...(window._allOrders || []));
+  Object.assign(accessHashes, window._accessHashes || {});
+  orderEntries.push(...(window._orderEntries || []));
+  (window._acceptedDates || []).forEach(d => acceptedDates.add(d));
   Object.assign(employeePasswords, window._employeePasswords || {});
   const empList = window._employees;
   if (empList && empList.length) {
     employees.push(...empList);
+    Object.assign(employeeNamesKa, window._employeeNamesKa || {});
+    let namesUpdated = false;
+    Object.entries(DEFAULT_EMPLOYEE_NAMES_KA).forEach(([k, v]) => {
+      if (employees.includes(k) && !employeeNamesKa[k]) { employeeNamesKa[k] = v; namesUpdated = true; }
+    });
+    if (namesUpdated) saveEmployees().catch(() => {});
   } else {
     employees.push(...DEFAULT_EMPLOYEES);
-    saveEmployees().then(()=>{});
+    Object.assign(employeeNamesKa, DEFAULT_EMPLOYEE_NAMES_KA);
+    saveEmployees().catch(() => {});
+  }
+  const savedLang = localStorage.getItem(LS_LANG_KEY);
+  if (savedLang === 'ka' || savedLang === 'ru') {
+    lang = savedLang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
   }
   applyTranslations();
   populateEmployeeSelect();
   updateQuickDayLists();
   const mm = document.getElementById('manager-month');
   if (mm) mm.value = new Date().toISOString().slice(0, 7);
+
+  const savedEmp = localStorage.getItem(LS_EMPLOYEE_KEY);
+  if (savedEmp && employees.includes(savedEmp)) {
+    document.getElementById('employee-select').value = savedEmp;
+    handleEmployeeSelect(savedEmp);
+  }
 });
 </script>
 </body>
