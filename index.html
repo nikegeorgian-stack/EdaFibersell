@@ -282,6 +282,69 @@
     .cook-money-card .k { font-size: 11px; color: var(--gray-600); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; font-weight: 700; }
     .cook-money-card .v { font-size: 24px; font-weight: 800; color: var(--brand); }
 
+    .cook-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+    .cook-tab {
+      padding: 11px 10px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 800;
+      border: 2px solid var(--gray-200); background: white; color: var(--gray-600);
+      cursor: pointer; font-family: inherit; min-height: 44px; transition: all .18s;
+    }
+    .cook-tab.active { background: var(--brand); color: white; border-color: var(--brand); box-shadow: 0 2px 8px rgba(255,85,0,0.22); }
+    .cook-tab:hover:not(.active) { border-color: var(--brand-soft); background: var(--brand-light); color: var(--brand-dark); }
+
+    .cf-section { background: white; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 12px; }
+    .cf-section-title { font-size: 12px; font-weight: 800; color: var(--gray-600); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 10px; }
+    .cf-nav { display: flex; align-items: center; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+    .cf-nav-btn {
+      padding: 6px 12px; border-radius: var(--radius-sm); font-size: 16px; font-weight: 700;
+      border: 2px solid var(--gray-200); background: white; color: var(--brand-dark);
+      cursor: pointer; font-family: inherit; min-width: 36px; min-height: 36px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cf-nav-btn:hover:not(:disabled) { background: var(--brand-light); border-color: var(--brand); color: var(--brand); }
+    .cf-nav-btn:disabled { opacity: 0.35; cursor: default; }
+    .cf-nav-month { flex: 1; text-align: center; font-size: 15px; font-weight: 800; color: var(--gray-800); min-width: 120px; }
+    .cf-nav-today {
+      padding: 6px 10px; border-radius: var(--radius-sm); font-size: 11px; font-weight: 700;
+      border: 2px solid var(--brand-soft); background: var(--brand-light); color: var(--brand-dark);
+      cursor: pointer; font-family: inherit; min-height: 36px; white-space: nowrap;
+    }
+    .cf-nav-today:hover:not(:disabled) { border-color: var(--brand); color: var(--brand); }
+    .cf-nav-today:disabled { opacity: 0.45; cursor: default; }
+    .cf-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .cf-stat { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 8px; padding: 10px; text-align: center; }
+    .cf-stat .k { font-size: 10px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
+    .cf-stat .v { font-size: 18px; font-weight: 800; color: var(--gray-800); }
+    .cf-stat.highlight { background: var(--brand-light); border-color: var(--brand-soft); }
+    .cf-stat.highlight .v { color: var(--brand); }
+    .cf-stat.credit { background: #ecfdf5; border-color: #6ee7b7; }
+    .cf-stat.credit .v { color: var(--green); }
+    .cf-balance-rows { display: grid; gap: 6px; }
+    .cf-balance-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 13px; padding: 6px 0; border-bottom: 1px dashed var(--gray-200); }
+    .cf-balance-row:last-child { border-bottom: none; }
+    .cf-balance-row .lbl { color: var(--gray-600); font-weight: 600; }
+    .cf-balance-row .val { font-weight: 800; color: var(--gray-800); white-space: nowrap; }
+    .cf-balance-row.total { margin-top: 4px; padding-top: 10px; border-top: 2px solid var(--brand-soft); border-bottom: none; }
+    .cf-balance-row.total .lbl { font-size: 14px; font-weight: 800; color: var(--gray-800); }
+    .cf-balance-row.total .val { font-size: 20px; color: var(--brand); }
+    .cf-balance-row.total.credit .val { color: var(--green); }
+    .cf-balance-row .edit-link { font-size: 11px; color: var(--brand); cursor: pointer; font-weight: 700; margin-left: 6px; border: none; background: none; font-family: inherit; padding: 0; }
+    .cf-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
+    .cf-ledger { display: grid; gap: 6px; max-height: 240px; overflow-y: auto; }
+    .cf-ledger-item {
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 8px;
+      padding: 10px 12px; font-size: 13px;
+    }
+    .cf-ledger-item .meta { flex: 1; min-width: 0; }
+    .cf-ledger-item .type { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .03em; margin-bottom: 2px; }
+    .cf-ledger-item .type.advance { color: #2563eb; }
+    .cf-ledger-item .type.payment { color: var(--green); }
+    .cf-ledger-item .note { font-size: 11px; color: var(--gray-500); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .cf-ledger-item .amt { font-weight: 800; white-space: nowrap; }
+    .cf-ledger-item .amt.advance { color: #2563eb; }
+    .cf-ledger-item .amt.payment { color: var(--green); }
+    .cf-carry-btn { width: 100%; margin-top: 4px; }
+
     .employee-section { display: grid; gap: 0; }
     .field-block { margin-bottom: 4px; }
     .field-block + .field-block { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gray-200); }
@@ -663,6 +726,12 @@
         </div>
       </div>
       <div class="card-body">
+      <div class="cook-tabs">
+        <button type="button" class="cook-tab active" id="cook-tab-menu" onclick="switchCookTab('menu')"></button>
+        <button type="button" class="cook-tab" id="cook-tab-finance" onclick="switchCookTab('finance')"></button>
+      </div>
+
+      <div id="cook-panel-menu">
       <div class="day-nav">
         <h2 id="cook-date"></h2>
         <button class="btn btn-primary" onclick="cookDay(-1)" id="lbl-prev-day"></button>
@@ -702,6 +771,42 @@
       <div class="cook-details-card">
         <h3 id="lbl-detailed-list"></h3>
         <div id="cook-details"></div>
+      </div>
+      </div>
+
+      <div id="cook-panel-finance" class="hidden">
+        <div class="cf-nav">
+          <button type="button" class="cf-nav-btn" id="cf-prev-month">‹</button>
+          <div class="cf-nav-month" id="cf-month-label"></div>
+          <button type="button" class="cf-nav-btn" id="cf-next-month">›</button>
+          <button type="button" class="cf-nav-today" id="cf-this-month"></button>
+        </div>
+
+        <div class="cf-section">
+          <div class="cf-section-title" id="lbl-cf-from-orders"></div>
+          <div class="cf-stats">
+            <div class="cf-stat"><div class="k" id="lbl-cf-portions"></div><div class="v" id="cf-portions">0</div></div>
+            <div class="cf-stat"><div class="k" id="lbl-cf-total"></div><div class="v" id="cf-total">0 ₾</div></div>
+            <div class="cf-stat highlight"><div class="k" id="lbl-cf-company"></div><div class="v" id="cf-company">0 ₾</div></div>
+            <div class="cf-stat"><div class="k" id="lbl-cf-employees"></div><div class="v" id="cf-employees">0 ₾</div></div>
+          </div>
+        </div>
+
+        <div class="cf-section">
+          <div class="cf-section-title" id="lbl-cf-org-calc"></div>
+          <div class="cf-balance-rows" id="cf-balance-rows"></div>
+        </div>
+
+        <div class="cf-actions">
+          <button type="button" class="btn btn-outline btn-full" id="btn-cf-advance"></button>
+          <button type="button" class="btn btn-primary btn-full" id="btn-cf-payment"></button>
+        </div>
+
+        <div class="cf-section">
+          <div class="cf-section-title" id="lbl-cf-ledger"></div>
+          <div class="cf-ledger" id="cf-ledger"></div>
+          <button type="button" class="btn btn-ghost btn-full cf-carry-btn" id="btn-cf-carry"></button>
+        </div>
       </div>
       </div>
     </div>
@@ -848,6 +953,7 @@
     if (typeof updateEmployeeMonthSummary === 'function') updateEmployeeMonthSummary();
     if (typeof updateManagerReport === 'function' && currentMode === 'manager') { updateManagerReport(); populateEmployeeFilter(); }
     if (typeof updateCookDisplay === 'function' && currentMode === 'cook') updateCookDisplay();
+    if (typeof updateCookFinanceDisplay === 'function' && currentMode === 'cook' && cookActiveTab === 'finance') updateCookFinanceDisplay();
     const jov = document.getElementById('juliet-ov');
     if (jov && typeof window._julietRender === 'function') window._julietRender();
   }
@@ -914,6 +1020,13 @@
       onSnapshot(collection(db, 'accepted_days'), snap => {
         if (!window._firebaseReady) return;
         applyAcceptedSnapshot(snap);
+        refreshOrderUI();
+      });
+
+      // Subscribe to cook finance ledger
+      onSnapshot(collection(db, 'cook_finance'), snap => {
+        if (!window._firebaseReady) return;
+        if (typeof applyCookFinanceSnapshot === 'function') applyCookFinanceSnapshot(snap);
         refreshOrderUI();
       });
 
@@ -1400,6 +1513,41 @@ const T = {
     cook_day_money:'За день: сумма',
     cook_month_orders:'За месяц: заказов',
     cook_month_money:'За месяц: сумма',
+    cook_tab_menu:'📋 Меню дня',
+    cook_tab_finance:'💰 Финансы',
+    cf_from_orders:'По заказам за месяц',
+    cf_portions:'Порций',
+    cf_total:'Всего начислено',
+    cf_company:'От организации',
+    cf_employees:'От сотрудников (удержания)',
+    cf_org_calc:'Расчёт с организацией',
+    cf_opening_debt:'Долг на начало месяца',
+    cf_accrued:'+ Начислено за месяц',
+    cf_advances:'− Авансы',
+    cf_payments:'− Оплаты',
+    cf_org_owes:'Организация должна',
+    cf_org_credit:'Переплата организации',
+    cf_add_advance:'+ Аванс',
+    cf_add_payment:'+ Оплата',
+    cf_ledger:'Журнал операций',
+    cf_no_entries:'Нет операций за этот месяц',
+    cf_entry_advance:'Аванс',
+    cf_entry_payment:'Оплата',
+    cf_amount:'Сумма (₾):',
+    cf_note:'Комментарий:',
+    cf_date:'Дата:',
+    cf_edit_opening:'Изменить',
+    cf_carry_forward:'Перенести остаток на следующий месяц',
+    cf_carry_ok:'Остаток перенесён на следующий месяц',
+    cf_opening_saved:'Долг на начало сохранён',
+    cf_entry_saved:'Операция сохранена',
+    cf_entry_deleted:'Операция удалена',
+    cf_edit_opening_title:'Долг на начало месяца',
+    cf_add_advance_title:'Аванс от организации',
+    cf_add_payment_title:'Оплата от организации',
+    cf_month_this:'Этот месяц',
+    cf_month_prev:'Предыдущий месяц',
+    cf_month_next:'Следующий месяц',
     btn_csv:'⬇️ CSV', btn_salary:'💰 Удержания',
     th_name:'Сотрудник', th_date:'Дата', th_cat:'Категория',
     th_pos:'Позиция', th_price:'Сумма',
@@ -1538,6 +1686,41 @@ const T = {
     cook_day_money:'დღე: თანხა',
     cook_month_orders:'თვე: შეკვეთები',
     cook_month_money:'თვე: თანხა',
+    cook_tab_menu:'📋 დღის მენიუ',
+    cook_tab_finance:'💰 ფინანსები',
+    cf_from_orders:'შეკვეთებით თვეში',
+    cf_portions:'პორცია',
+    cf_total:'სულ დარიცხვა',
+    cf_company:'ორგანიზაციისგან',
+    cf_employees:'თანამშრომლებისგან (გამოქვითვა)',
+    cf_org_calc:'ორგანიზაციასთან ანგარიში',
+    cf_opening_debt:'დავალიანება თვის დასაწყისში',
+    cf_accrued:'+ დარიცხვა თვეში',
+    cf_advances:'− ავანსები',
+    cf_payments:'− გადახდები',
+    cf_org_owes:'ორგანიზაცია უნდა გადაიხდეს',
+    cf_org_credit:'ორგანიზაციის პერეპლატა',
+    cf_add_advance:'+ ავანსი',
+    cf_add_payment:'+ გადახდა',
+    cf_ledger:'ოპერაციების ჟურნალი',
+    cf_no_entries:'ამ თვეში ოპერაცია არ არის',
+    cf_entry_advance:'ავანსი',
+    cf_entry_payment:'გადახდა',
+    cf_amount:'თანხა (₾):',
+    cf_note:'კომენტარი:',
+    cf_date:'თარიღი:',
+    cf_edit_opening:'შეცვლა',
+    cf_carry_forward:'ნაშთის გადატანა შემდეგ თვეში',
+    cf_carry_ok:'ნაშთი გადატანილია',
+    cf_opening_saved:'დავალიანება შენახულია',
+    cf_entry_saved:'ოპერაცია შენახულია',
+    cf_entry_deleted:'ოპერაცია წაშლილია',
+    cf_edit_opening_title:'დავალიანება თვის დასაწყისში',
+    cf_add_advance_title:'ავანსი ორგანიზაციისგან',
+    cf_add_payment_title:'გადახდა ორგანიზაციისგან',
+    cf_month_this:'ეს თვე',
+    cf_month_prev:'წინა თვე',
+    cf_month_next:'შემდეგი თვე',
     btn_csv:'⬇️ CSV', btn_salary:'💰 გამოქვითვა',
     th_name:'სახელი გვარი', th_date:'თარიღი', th_cat:'კატეგორია',
     th_pos:'პოზიცია', th_price:'ფასი',
@@ -1654,6 +1837,9 @@ let currentMonth = new Date();
 let cookCurrentDate = new Date(); cookCurrentDate.setHours(0,0,0,0);
 let employeeManagerOverride = false;
 let employeeSummaryMonth = null;
+let cookActiveTab = 'menu';
+let cookFinanceMonth = null;
+const cookFinanceByMonth = {};
 
 // =============================================
 // LANG SWITCH
@@ -1679,6 +1865,7 @@ function refreshDynamicTranslations() {
   if (document.getElementById('juliet-ov') && typeof window._julietRender === 'function') window._julietRender();
   if (currentMode === 'manager' && typeof updateManagerReport === 'function') updateManagerReport();
   if (currentMode === 'cook' && typeof updateCookDisplay === 'function') updateCookDisplay();
+  if (currentMode === 'cook' && cookActiveTab === 'finance' && typeof updateCookFinanceDisplay === 'function') updateCookFinanceDisplay();
 }
 
 function setLang(l) {
@@ -1720,6 +1907,11 @@ function applyTranslations() {
     'lbl-cook-day-money':'cook_day_money','lbl-cook-month-orders':'cook_month_orders',
     'lbl-cook-month-money':'cook_month_money',
     'lbl-meat-cook':'meat','lbl-vegan-cook':'vegan',
+    'cook-tab-menu':'cook_tab_menu','cook-tab-finance':'cook_tab_finance',
+    'lbl-cf-from-orders':'cf_from_orders','lbl-cf-portions':'cf_portions','lbl-cf-total':'cf_total',
+    'lbl-cf-company':'cf_company','lbl-cf-employees':'cf_employees','lbl-cf-org-calc':'cf_org_calc',
+    'lbl-cf-ledger':'cf_ledger','btn-cf-advance':'cf_add_advance','btn-cf-payment':'cf_add_payment',
+    'btn-cf-carry':'cf_carry_forward','cf-this-month':'cf_month_this',
     'lbl-quick-order':'quick_order_title','lbl-quick-meat':'meat','lbl-quick-vegan':'vegan',
     'quick-order-save':'quick_order_save'
   };
@@ -1749,8 +1941,8 @@ function switchMode(mode) {
     return;
   }
   if (mode === 'cook') {
-    if (canAutoAuthAccess('cook')) { activateMode('cook'); updateCookDisplay(); return; }
-    showPasswordModal(t('cook_login'), t('cook_login_desc'), () => { activateMode('cook'); updateCookDisplay(); }, 'cook');
+    if (canAutoAuthAccess('cook')) { activateMode('cook'); switchCookTab('menu'); updateCookDisplay(); return; }
+    showPasswordModal(t('cook_login'), t('cook_login_desc'), () => { activateMode('cook'); switchCookTab('menu'); updateCookDisplay(); }, 'cook');
     return;
   }
   activateMode('employee');
@@ -2783,6 +2975,282 @@ function showMonthlyPrintReport() {
 // =============================================
 // COOK MODE
 // =============================================
+function switchCookTab(tab) {
+  cookActiveTab = tab;
+  document.getElementById('cook-panel-menu').classList.toggle('hidden', tab !== 'menu');
+  document.getElementById('cook-panel-finance').classList.toggle('hidden', tab !== 'finance');
+  document.getElementById('cook-tab-menu').classList.toggle('active', tab === 'menu');
+  document.getElementById('cook-tab-finance').classList.toggle('active', tab === 'finance');
+  if (tab === 'menu') updateCookDisplay();
+  else {
+    if (!cookFinanceMonth) resetCookFinanceMonth();
+    updateCookFinanceDisplay();
+  }
+}
+
+function normalizeCookFinanceDoc(data) {
+  const d = data || {};
+  return {
+    opening_debt: Number(d.opening_debt) || 0,
+    entries: Array.isArray(d.entries) ? d.entries.map(e => ({
+      id: e.id || '',
+      type: e.type === 'payment' ? 'payment' : 'advance',
+      amount: Number(e.amount) || 0,
+      date: e.date || '',
+      note: e.note || '',
+      created_at: e.created_at || ''
+    })) : []
+  };
+}
+
+function applyCookFinanceSnapshot(snap) {
+  Object.keys(cookFinanceByMonth).forEach(k => delete cookFinanceByMonth[k]);
+  snap.docs.forEach(d => { cookFinanceByMonth[d.id] = normalizeCookFinanceDoc(d.data()); });
+}
+
+function resetCookFinanceMonth() {
+  cookFinanceMonth = getTbilisiMonthStart();
+}
+
+function getCookFinanceMonthStr() {
+  if (!cookFinanceMonth) resetCookFinanceMonth();
+  return `${cookFinanceMonth.getFullYear()}-${String(cookFinanceMonth.getMonth() + 1).padStart(2, '0')}`;
+}
+
+function shiftCookFinanceMonth(delta) {
+  if (!cookFinanceMonth) resetCookFinanceMonth();
+  const next = new Date(cookFinanceMonth.getFullYear(), cookFinanceMonth.getMonth() + delta, 1);
+  if (next > getTbilisiMonthStart()) return;
+  cookFinanceMonth = next;
+  updateCookFinanceDisplay();
+}
+
+function getCookFinanceDoc(monthStr) {
+  return cookFinanceByMonth[monthStr] || { opening_debt: 0, entries: [] };
+}
+
+async function saveCookFinanceDoc(monthStr, data) {
+  const payload = {
+    opening_debt: Number(data.opening_debt) || 0,
+    entries: (data.entries || []).map(e => ({
+      id: e.id,
+      type: e.type,
+      amount: Number(e.amount) || 0,
+      date: e.date,
+      note: e.note || '',
+      created_at: e.created_at || new Date().toISOString()
+    })),
+    updated_at: new Date().toISOString()
+  };
+  await safeFirebase('saveCookFinance', () =>
+    window._setDoc(window._doc(window._db, 'cook_finance', monthStr), payload)
+  );
+  cookFinanceByMonth[monthStr] = normalizeCookFinanceDoc(payload);
+}
+
+function getMonthOrderFinance(monthStr) {
+  const prefix = monthStr + '-';
+  const entries = orderEntries.filter(e => e.order_date.startsWith(prefix) && (e.meat + e.vegan > 0));
+  let portions = 0, company = 0, employee = 0;
+  entries.forEach(e => {
+    entryToDetailedRows(e).forEach(r => {
+      portions++;
+      company += r.companyPays;
+      employee += r.employeePays;
+    });
+  });
+  return { portions, company, employee, total: portions * 10 };
+}
+
+function calcCookFinanceSummary(monthStr) {
+  const doc = getCookFinanceDoc(monthStr);
+  const orders = getMonthOrderFinance(monthStr);
+  const advances = doc.entries.filter(e => e.type === 'advance').reduce((s, e) => s + e.amount, 0);
+  const payments = doc.entries.filter(e => e.type === 'payment').reduce((s, e) => s + e.amount, 0);
+  const opening = doc.opening_debt;
+  const balance = opening + orders.company - advances - payments;
+  return { ...orders, opening, advances, payments, balance, entries: [...doc.entries].sort((a, b) => (b.date || '').localeCompare(a.date || '')) };
+}
+
+function fmtMoney(n) {
+  return (Number(n) || 0) + ' ₾';
+}
+
+function updateCookFinanceDisplay() {
+  if (currentMode !== 'cook' || cookActiveTab !== 'finance') return;
+  if (!cookFinanceMonth) resetCookFinanceMonth();
+  const monthStr = getCookFinanceMonthStr();
+  const s = calcCookFinanceSummary(monthStr);
+  const onCurrent = isCurrentTbilisiMonth(cookFinanceMonth);
+
+  document.getElementById('cf-month-label').textContent = formatAppDate(monthStr + '-01', 'monthYear');
+  document.getElementById('cf-portions').textContent = s.portions;
+  document.getElementById('cf-total').textContent = fmtMoney(s.total);
+  document.getElementById('cf-company').textContent = fmtMoney(s.company);
+  document.getElementById('cf-employees').textContent = fmtMoney(s.employee);
+
+  const prevBtn = document.getElementById('cf-prev-month');
+  const nextBtn = document.getElementById('cf-next-month');
+  const thisBtn = document.getElementById('cf-this-month');
+  if (prevBtn) prevBtn.setAttribute('aria-label', t('cf_month_prev'));
+  if (nextBtn) { nextBtn.setAttribute('aria-label', t('cf_month_next')); nextBtn.disabled = onCurrent; }
+  if (thisBtn) thisBtn.disabled = onCurrent;
+
+  const isCredit = s.balance < 0;
+  const totalLabel = isCredit ? t('cf_org_credit') : t('cf_org_owes');
+  const balanceRows = document.getElementById('cf-balance-rows');
+  if (balanceRows) {
+    balanceRows.innerHTML = `
+      <div class="cf-balance-row">
+        <span class="lbl">${t('cf_opening_debt')} <button type="button" class="edit-link" id="cf-edit-opening">${t('cf_edit_opening')}</button></span>
+        <span class="val">${fmtMoney(s.opening)}</span>
+      </div>
+      <div class="cf-balance-row"><span class="lbl">${t('cf_accrued')}</span><span class="val">${fmtMoney(s.company)}</span></div>
+      <div class="cf-balance-row"><span class="lbl">${t('cf_advances')}</span><span class="val">${fmtMoney(s.advances)}</span></div>
+      <div class="cf-balance-row"><span class="lbl">${t('cf_payments')}</span><span class="val">${fmtMoney(s.payments)}</span></div>
+      <div class="cf-balance-row total${isCredit ? ' credit' : ''}">
+        <span class="lbl">${totalLabel}</span>
+        <span class="val">${fmtMoney(Math.abs(s.balance))}</span>
+      </div>`;
+    balanceRows.querySelector('#cf-edit-opening').addEventListener('click', () => showCookOpeningDebtModal(monthStr));
+  }
+
+  const ledger = document.getElementById('cf-ledger');
+  if (ledger) {
+    if (!s.entries.length) {
+      ledger.innerHTML = `<p style="color:var(--gray-400);font-size:13px;text-align:center;padding:12px;">${t('cf_no_entries')}</p>`;
+    } else {
+      ledger.innerHTML = s.entries.map(e => {
+        const typeLabel = e.type === 'payment' ? t('cf_entry_payment') : t('cf_entry_advance');
+        const dateLabel = e.date ? formatAppDate(e.date, 'date') : '—';
+        return `<div class="cf-ledger-item">
+          <div class="meta">
+            <div class="type ${e.type}">${typeLabel}</div>
+            <div>${dateLabel}${e.note ? ` · <span class="note">${e.note}</span>` : ''}</div>
+          </div>
+          <span class="amt ${e.type}">−${fmtMoney(e.amount)}</span>
+          <button type="button" class="btn btn-ghost" style="min-height:32px;padding:4px 8px;font-size:12px;" data-del="${e.id}">🗑</button>
+        </div>`;
+      }).join('');
+      ledger.querySelectorAll('[data-del]').forEach(btn => {
+        btn.addEventListener('click', () => deleteCookFinanceEntry(monthStr, btn.dataset.del));
+      });
+    }
+  }
+}
+
+function showCookAmountModal(title, defaultDate, onSave) {
+  const ov = document.createElement('div');
+  ov.className = 'modal-overlay';
+  ov.innerHTML = `
+    <div class="modal" style="max-width:420px;">
+      <h2>${title}</h2>
+      <div class="input-group" style="margin-top:12px;">
+        <label class="field-label">${t('cf_amount')}</label>
+        <input type="number" id="cf-amt" min="0" step="1" inputmode="numeric" placeholder="0">
+      </div>
+      <div class="input-group">
+        <label class="field-label">${t('cf_date')}</label>
+        <input type="date" id="cf-dt" value="${defaultDate}">
+      </div>
+      <div class="input-group">
+        <label class="field-label">${t('cf_note')}</label>
+        <input type="text" id="cf-note" placeholder="">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cf-cancel">${t('cancel')}</button>
+        <button class="btn btn-primary" id="cf-save">${t('save')}</button>
+      </div>
+    </div>`;
+  document.body.appendChild(ov);
+  ov.querySelector('#cf-cancel').addEventListener('click', () => ov.remove());
+  ov.querySelector('#cf-save').addEventListener('click', async () => {
+    const amount = parseFloat(ov.querySelector('#cf-amt').value);
+    const date = ov.querySelector('#cf-dt').value;
+    const note = ov.querySelector('#cf-note').value.trim();
+    if (!amount || amount <= 0) { notify(t('cf_amount')); return; }
+    if (!date) return;
+    try {
+      await onSave(amount, date, note);
+      ov.remove();
+      notify(t('cf_entry_saved'));
+      updateCookFinanceDisplay();
+    } catch (e) { /* notified */ }
+  });
+  ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
+  setTimeout(() => ov.querySelector('#cf-amt').focus(), 80);
+}
+
+function showCookOpeningDebtModal(monthStr) {
+  const doc = getCookFinanceDoc(monthStr);
+  const ov = document.createElement('div');
+  ov.className = 'modal-overlay';
+  ov.innerHTML = `
+    <div class="modal" style="max-width:420px;">
+      <h2>${t('cf_edit_opening_title')}</h2>
+      <p class="modal-desc">${formatAppDate(monthStr + '-01', 'monthYear')}</p>
+      <div class="input-group" style="margin-top:12px;">
+        <label class="field-label">${t('cf_opening_debt')}</label>
+        <input type="number" id="cf-open" min="0" step="1" value="${doc.opening_debt || 0}" inputmode="numeric">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cf-cancel">${t('cancel')}</button>
+        <button class="btn btn-primary" id="cf-save">${t('save')}</button>
+      </div>
+    </div>`;
+  document.body.appendChild(ov);
+  ov.querySelector('#cf-cancel').addEventListener('click', () => ov.remove());
+  ov.querySelector('#cf-save').addEventListener('click', async () => {
+    const val = parseFloat(ov.querySelector('#cf-open').value);
+    try {
+      const data = getCookFinanceDoc(monthStr);
+      data.opening_debt = Math.max(0, val || 0);
+      await saveCookFinanceDoc(monthStr, data);
+      ov.remove();
+      notify(t('cf_opening_saved'));
+      updateCookFinanceDisplay();
+    } catch (e) { /* notified */ }
+  });
+  ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
+}
+
+async function addCookFinanceEntry(monthStr, type, amount, date, note) {
+  const data = getCookFinanceDoc(monthStr);
+  data.entries.push({
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+    type,
+    amount,
+    date,
+    note,
+    created_at: new Date().toISOString()
+  });
+  await saveCookFinanceDoc(monthStr, data);
+}
+
+async function deleteCookFinanceEntry(monthStr, entryId) {
+  const data = getCookFinanceDoc(monthStr);
+  data.entries = data.entries.filter(e => e.id !== entryId);
+  await saveCookFinanceDoc(monthStr, data);
+  notify(t('cf_entry_deleted'));
+  updateCookFinanceDisplay();
+}
+
+async function carryCookFinanceBalance() {
+  const monthStr = getCookFinanceMonthStr();
+  const s = calcCookFinanceSummary(monthStr);
+  const next = new Date(cookFinanceMonth.getFullYear(), cookFinanceMonth.getMonth() + 1, 1);
+  if (next > getTbilisiMonthStart()) return;
+  const nextStr = `${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, '0')}`;
+  const nextDoc = getCookFinanceDoc(nextStr);
+  nextDoc.opening_debt = Math.max(0, s.balance);
+  try {
+    await saveCookFinanceDoc(nextStr, nextDoc);
+    notify(t('cf_carry_ok'));
+    cookFinanceMonth = next;
+    updateCookFinanceDisplay();
+  } catch (e) { /* notified */ }
+}
+
 function cookDay(delta) { cookCurrentDate=new Date(cookCurrentDate); cookCurrentDate.setDate(cookCurrentDate.getDate()+delta); updateCookDisplay(); }
 function cookToday() { cookCurrentDate=new Date(); cookCurrentDate.setHours(0,0,0,0); updateCookDisplay(); }
 
@@ -2800,14 +3268,13 @@ function updateCookDisplay() {
     grouped[e.employee_name].meat += e.meat;
     grouped[e.employee_name].vegan += e.vegan;
   });
-  const monthPrefix = `${cookCurrentDate.getFullYear()}-${String(cookCurrentDate.getMonth() + 1).padStart(2,'0')}-`;
-  const monthEntries = orderEntries.filter(e => e.order_date.startsWith(monthPrefix) && (e.meat + e.vegan > 0));
+  const monthStr = `${cookCurrentDate.getFullYear()}-${String(cookCurrentDate.getMonth() + 1).padStart(2,'0')}`;
+  const monthFin = getMonthOrderFinance(monthStr);
   const dayCount = dayEntries.reduce((s, e) => s + e.meat + e.vegan, 0);
-  const monthCount = monthEntries.reduce((s, e) => s + e.meat + e.vegan, 0);
   document.getElementById('cook-day-orders').textContent = dayCount;
-  document.getElementById('cook-day-money').textContent = (dayCount * 10) + ' ₾';
-  document.getElementById('cook-month-orders').textContent = monthCount;
-  document.getElementById('cook-month-money').textContent = (monthCount * 10) + ' ₾';
+  document.getElementById('cook-day-money').textContent = fmtMoney(dayCount * 10);
+  document.getElementById('cook-month-orders').textContent = monthFin.portions;
+  document.getElementById('cook-month-money').textContent = fmtMoney(monthFin.total);
   const det=document.getElementById('cook-details');
   const keys=Object.keys(grouped);
   if(!keys.length){det.innerHTML=`<p style="color:var(--gray-400);font-size:14px;">${t('no_orders_day')}</p>`;return;}
@@ -2971,6 +3438,21 @@ document.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=
 document.getElementById('btn-employee').addEventListener('click',()=>switchMode('employee'));
 document.getElementById('btn-manager').addEventListener('click',()=>switchMode('manager'));
 document.getElementById('btn-cook').addEventListener('click',()=>switchMode('cook'));
+
+document.getElementById('cf-prev-month').addEventListener('click', () => shiftCookFinanceMonth(-1));
+document.getElementById('cf-next-month').addEventListener('click', () => shiftCookFinanceMonth(1));
+document.getElementById('cf-this-month').addEventListener('click', () => { resetCookFinanceMonth(); updateCookFinanceDisplay(); });
+document.getElementById('btn-cf-advance').addEventListener('click', () => {
+  const monthStr = getCookFinanceMonthStr();
+  showCookAmountModal(t('cf_add_advance_title'), toDateStr(getTbilisiNow()), (amt, dt, note) =>
+    addCookFinanceEntry(monthStr, 'advance', amt, dt, note));
+});
+document.getElementById('btn-cf-payment').addEventListener('click', () => {
+  const monthStr = getCookFinanceMonthStr();
+  showCookAmountModal(t('cf_add_payment_title'), toDateStr(getTbilisiNow()), (amt, dt, note) =>
+    addCookFinanceEntry(monthStr, 'payment', amt, dt, note));
+});
+document.getElementById('btn-cf-carry').addEventListener('click', () => carryCookFinanceBalance());
 
 document.getElementById('qo-meat-minus').addEventListener('click', () => { if (quickOrderMeat > 0) { quickOrderMeat--; document.getElementById('qo-meat').value = quickOrderMeat; } });
 document.getElementById('qo-meat-plus').addEventListener('click', () => { if (quickOrderMeat < 10) { quickOrderMeat++; document.getElementById('qo-meat').value = quickOrderMeat; } });
